@@ -19,7 +19,18 @@ app.use((request, response, next) => {
 app.use('/api/teams', teamRoutes)
 
 
-// listen for requests from port number
-app.listen(process.env.PORT, () => {
-    console.log('Listening on port 4000');
-})
+// connect to database
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+    
+        // listen for requests from port number
+        app.listen(process.env.PORT, () => {
+            console.log('Listening on port 4000');
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
+
+

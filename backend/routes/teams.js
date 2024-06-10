@@ -1,4 +1,5 @@
 const express = require('express')
+const Team = require('../models/team.model')
 
 const router = express.Router()
 
@@ -15,8 +16,15 @@ router.get('/:id', (request, response) => {
 
 
 // POST a new team
-router.post('/', (request, response) => {
-    response.json({mssg: 'POST a new team'})
+router.post('/', async (request, response) => {
+    const {teamName, teamId} = request.body
+
+    try {
+        const team = await Team.create({teamName, teamId})
+        response.status().json(team)
+    } catch  (error) {
+        response.status(400).json({error: error.message})
+    }
 })
 
 // DELETE a team
