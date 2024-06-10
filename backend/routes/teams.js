@@ -1,42 +1,33 @@
 const express = require('express')
-const Team = require('../models/team.model')
+const {
+    createTeam,
+    getTeams,
+    getTeam,
+    deleteTeam,
+    updateTeam
+} = require('../controllers/teamController')
 
 const router = express.Router()
 
 
 // GET all teams
-router.get('/', (request, response) => {
-    response.json({mssg: 'GET all teams'})
-})
+router.get('/', getTeams)
     
 // GET a single team data
-router.get('/:id', (request, response) => {
-    response.json({mssg: 'GET a single Team'})
-})
+router.get('/:id', getTeam)
 
 
 // POST a new team
-router.post('/', async (request, response) => {
-    const {teamName, teamId} = request.body
-
-    try {
-        const team = await Team.create({teamName, teamId})
-        response.status(200).json(team)
-    } catch  (error) {
-        response.status(400).json({error: error.message})
-    }
-})
+router.post('/', createTeam)
 
 // DELETE a team
 
-router.delete('/:id', (request, response) => {
-    response.json({mssg: 'DELTE a team'})
-})
+router.delete('/:id', deleteTeam)
 
 // UPDATE a team
 
-router.patch('/:id', (request, response) => {
-    response.json({mssg: 'UPDATE a new team'})
-})
+router.patch('/:id', updateTeam)
+
+
 
 module.exports = router
