@@ -21,7 +21,7 @@ router.post('/', async (request, response) => {
 
     try {
         const team = await Team.create({teamName, teamId})
-        response.status().json(team)
+        response.status(200).json(team)
     } catch  (error) {
         response.status(400).json({error: error.message})
     }
