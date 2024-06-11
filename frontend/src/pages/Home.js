@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 //components
 import TeamDetails from '../components/TeamDetails'
+import TeamForm from '../components/TeamForm'
 
 const Home = () => {
     const [teams, setteams] = useState(null)
@@ -26,7 +27,9 @@ const Home = () => {
                     <TeamDetails key={team._id} team={team} />
                 ))}
             </div>
+            <TeamForm />
         </div>
+        
     )
 }
 
