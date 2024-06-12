@@ -27,16 +27,18 @@ const getTeam = async (request, response) => {
 const createTeam = async (request, response) => {
     const {teamName, teamId} = request.body
 
+    const regexOnlyDigits = /^\d+$/
+    const regexOnlyAlpha = /^[A-Za-z]+$/
     let emptyFields = []
 
-    if(!teamName) {
+    if(!teamName || !regexOnlyAlpha.test(teamName)) {
         emptyFields.push('teamName')
     }
-    if(!teamId) {
+    if(!teamId || !regexOnlyDigits.test(teamId)) {
         emptyFields.push('teamId')
     }
     if(emptyFields.length > 0) {
-        return response.status(400).json({error: 'Please fill in all the fields', emptyFields})
+        return response.status(400).json({error: 'Please correct the following fields', emptyFields})
     }
 
     // add to databse
