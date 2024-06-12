@@ -26,6 +26,19 @@ const getTeam = async (request, response) => {
 //create new team
 const createTeam = async (request, response) => {
     const {teamName, teamId} = request.body
+
+    let emptyFields = []
+
+    if(!teamName) {
+        emptyFields.push('teamName')
+    }
+    if(!teamId) {
+        emptyFields.push('teamId')
+    }
+    if(emptyFields.length > 0) {
+        return response.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    }
+
     // add to databse
     try {
         const team = await Team.create({teamName, teamId})

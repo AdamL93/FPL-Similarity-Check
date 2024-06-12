@@ -6,6 +6,7 @@ const TeamForm = () => {
     const [teamName, setTeamName] = useState(null)
     const [teamId, setTeamId] = useState(null)
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     const completeSubmit = async (e) => {
         e.preventDefault()
@@ -23,11 +24,13 @@ const TeamForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
             setTeamId(null)
             setTeamName(null)
             setError(null)
+            setEmptyFields([])
             console.log('New Team Added!')
             dispatch({type: 'CREATE_TEAM', payload: json})
         }
@@ -42,6 +45,7 @@ const TeamForm = () => {
                 type="text"
                 onChange={(e) => setTeamId(e.target.value)}
                 value={teamId}
+                className={emptyFields.includes('teamId') ? 'error': ''}
 
             />
             <label>Team Name</label>
@@ -49,6 +53,7 @@ const TeamForm = () => {
                 type="text"
                 onChange={(e) => setTeamName(e.target.value)}
                 value={teamName}
+                className={emptyFields.includes('teamName') ? 'error': ''}
 
             />
             <button>Add Team</button>
