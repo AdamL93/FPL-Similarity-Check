@@ -99,3 +99,8 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
+/*Style for error message in form*/
+input.error {
+  border: 1px solid var(--error);
+}
