@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import {useTeamsContext} from "../hooks/useTeamsContext"
 
 //components
 import TeamDetails from '../components/TeamDetails'
 import TeamForm from '../components/TeamForm'
 
 const Home = () => {
-    const [teams, setteams] = useState(null)
+    const {teams, dispatch} = useTeamsContext()
     //fetches data - tutorial 9
     useEffect(() => {
         const fetchTeams = async () => {
@@ -13,7 +14,7 @@ const Home = () => {
             const json = await response.json()
 
             if(response.ok) {
-                setteams(json)
+                dispatch({type: 'SET_TEAMS', payload: json})
             }
         }
 

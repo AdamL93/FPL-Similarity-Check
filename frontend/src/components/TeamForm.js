@@ -1,6 +1,8 @@
 import { useState } from "react"
+import {useTeamsContext} from "../hooks/useTeamsContext"
 
 const TeamForm = () => {
+    const { dispatch } = useTeamsContext()
     const [teamName, setTeamName] = useState(null)
     const [teamId, setTeamId] = useState(null)
     const [error, setError] = useState(null)
@@ -27,6 +29,7 @@ const TeamForm = () => {
             setTeamName(null)
             setError(null)
             console.log('New Team Added!')
+            dispatch({type: 'CREATE_TEAM', payload: json})
         }
     }
 
