@@ -21,9 +21,8 @@ const TeamDetails = ({ team }) => {
             <h4>{team.teamName}</h4>
             <p><strong>Team Id:</strong>{team.teamId}</p>
             <p>{team.createdAt}</p>
-            <span onClick = {handleClick}
-            style={{ color: 'white', fontWeight: 'bold', cursor: 'pointer', background: '#42b191' }}>
-                Delete
+            <span className="material-symbols-outlined" onClick = {handleClick}>
+                delete
             </span>
         </div>
     )
