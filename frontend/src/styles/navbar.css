@@ -1,0 +1,35 @@
+
+/* NavBar css*/
+
+header {
+    background: #ffffff;
+  }
+  header .container {
+    max-width: 1950px;
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  header a {
+    color: #000120;
+    text-decoration: none;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .container .navbar-logo {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+  .container .navbar-title {
+    margin-right: 725px;
+  }
+  
+
