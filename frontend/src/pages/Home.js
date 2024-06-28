@@ -1,37 +1,14 @@
-import { useEffect } from 'react'
-import {useTeamsContext} from "../hooks/useTeamsContext"
 
-//components
-import TeamDetails from '../components/TeamDetails'
-import TeamForm from '../components/TeamForm'
+import SearchBar from '../components/SearchBar'
+
 
 const Home = () => {
-    const {teams, dispatch} = useTeamsContext()
-    //fetches data - tutorial 9
-    useEffect(() => {
-        const fetchTeams = async () => {
-            const response = await fetch('/api/teams') //this should be https://localhost4000/api/teams for actual development. See video 9 - 8mins
-            const json = await response.json()
-
-            if(response.ok) {
-                dispatch({type: 'SET_TEAMS', payload: json})
-            }
-        }
-
-        fetchTeams()
-    }, [])
-
     return (
-        <div className="home">
-            <div className ="teams">
-                {teams && teams.map((team) =>(
-                    <TeamDetails key={team._id} team={team} />
-                ))}
-            </div>
-            <TeamForm />
+        <div className = "home">
+            <SearchBar/>
         </div>
-        
-    )
-}
+    );
+};
 
-export default Home
+
+export default Home;

@@ -2,7 +2,7 @@
 /* NavBar css*/
 
 header {
-    background: #ffffff;
+    background: #999999;
   }
   header .container {
     max-width: 1950px;
@@ -13,7 +13,7 @@ header {
     margin: 0 auto;
   }
   header a {
-    color: #000120;
+    color: #37003C;
     text-decoration: none;
   }
 

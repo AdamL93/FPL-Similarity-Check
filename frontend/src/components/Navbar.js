@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import logo from '../resources/logo.png'
 
 
@@ -7,7 +7,7 @@ const Navbar = () => {
         <header>
             <div className="container">
                 {/*Can possibly reduce number of Links to neaten code*/}
-                <Link to="/">
+                <Link to="/Result">
                     <img src={logo} alt ="logo" className = "navbar-logo" />
                 </Link>
 
