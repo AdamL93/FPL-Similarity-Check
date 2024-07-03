@@ -1,0 +1,238 @@
+{
+    "new_entries": {
+        "has_next": false,
+        "page": 1,
+        "results": []
+    },
+    "last_updated_data": "2024-05-19T19:23:08Z",
+    "league": {
+        "id": 111030,
+        "name": "Liga De Fat Welt",
+        "created": "2023-07-06T08:51:48.024539Z",
+        "closed": false,
+        "max_entries": null,
+        "league_type": "x",
+        "scoring": "c",
+        "admin_entry": 90004,
+        "start_event": 1,
+        "code_privacy": "p",
+        "has_cup": true,
+        "cup_league": 2580875,
+        "rank": null
+    },
+    "standings": {
+        "has_next": false,
+        "page": 1,
+        "results": [
+            {
+                "id": 24871983,
+                "event_total": 77,
+                "player_name": "James Hymers",
+                "rank": 1,
+                "last_rank": 1,
+                "rank_sort": 1,
+                "total": 2513,
+                "entry": 2732659,
+                "entry_name": "whats a mata with u"
+            },
+            {
+                "id": 51247164,
+                "event_total": 70,
+                "player_name": "Robin Herbert",
+                "rank": 2,
+                "last_rank": 2,
+                "rank_sort": 2,
+                "total": 2477,
+                "entry": 259365,
+                "entry_name": "Fredolent"
+            },
+            {
+                "id": 39273714,
+                "event_total": 72,
+                "player_name": "Blair Cowan",
+                "rank": 3,
+                "last_rank": 4,
+                "rank_sort": 3,
+                "total": 2460,
+                "entry": 5021421,
+                "entry_name": "Blair Pitch Project"
+            },
+            {
+                "id": 49816586,
+                "event_total": 51,
+                "player_name": "Jordan Barrass-Sykes",
+                "rank": 4,
+                "last_rank": 3,
+                "rank_sort": 4,
+                "total": 2440,
+                "entry": 3425112,
+                "entry_name": "Algorithm F.C"
+            },
+            {
+                "id": 51753520,
+                "event_total": 89,
+                "player_name": "Adam Lynn",
+                "rank": 5,
+                "last_rank": 6,
+                "rank_sort": 5,
+                "total": 2384,
+                "entry": 202710,
+                "entry_name": "Change Name"
+            },
+            {
+                "id": 24842943,
+                "event_total": 63,
+                "player_name": "Patrick Tillbrook",
+                "rank": 6,
+                "last_rank": 5,
+                "rank_sort": 6,
+                "total": 2379,
+                "entry": 1634013,
+                "entry_name": "Mike Barry\u2019s Puddins"
+            },
+            {
+                "id": 3696557,
+                "event_total": 69,
+                "player_name": "Jason Scott",
+                "rank": 7,
+                "last_rank": 7,
+                "rank_sort": 7,
+                "total": 2354,
+                "entry": 90004,
+                "entry_name": "The Bughtlin Bhoys"
+            },
+            {
+                "id": 49699218,
+                "event_total": 62,
+                "player_name": "Adam Smith",
+                "rank": 8,
+                "last_rank": 8,
+                "rank_sort": 8,
+                "total": 2344,
+                "entry": 6218658,
+                "entry_name": "Put ball in goal fc"
+            },
+            {
+                "id": 39430785,
+                "event_total": 54,
+                "player_name": "Sean Wringe",
+                "rank": 9,
+                "last_rank": 9,
+                "rank_sort": 9,
+                "total": 2306,
+                "entry": 86266,
+                "entry_name": "Clerry Jungle"
+            },
+            {
+                "id": 49664323,
+                "event_total": 56,
+                "player_name": "Jason Wyse",
+                "rank": 10,
+                "last_rank": 10,
+                "rank_sort": 10,
+                "total": 2304,
+                "entry": 2402629,
+                "entry_name": "Not Pitching a Trent"
+            },
+            {
+                "id": 49851544,
+                "event_total": 48,
+                "player_name": "Rod Farnood",
+                "rank": 11,
+                "last_rank": 11,
+                "rank_sort": 11,
+                "total": 2278,
+                "entry": 5158690,
+                "entry_name": "The Double Champ"
+            },
+            {
+                "id": 24884519,
+                "event_total": 51,
+                "player_name": "Jamie Docherty",
+                "rank": 12,
+                "last_rank": 12,
+                "rank_sort": 12,
+                "total": 2259,
+                "entry": 3355074,
+                "entry_name": "The Kinder Mbeumo\u2019s"
+            },
+            {
+                "id": 24849927,
+                "event_total": 54,
+                "player_name": "John Bryce",
+                "rank": 13,
+                "last_rank": 13,
+                "rank_sort": 13,
+                "total": 2246,
+                "entry": 2991379,
+                "entry_name": "team of the crop"
+            },
+            {
+                "id": 3699308,
+                "event_total": 68,
+                "player_name": "Stephen Christie",
+                "rank": 14,
+                "last_rank": 14,
+                "rank_sort": 14,
+                "total": 2227,
+                "entry": 79617,
+                "entry_name": "Teeby\u2019s Tornadoes"
+            },
+            {
+                "id": 3706850,
+                "event_total": 66,
+                "player_name": "Jack Cree",
+                "rank": 15,
+                "last_rank": 15,
+                "rank_sort": 15,
+                "total": 2203,
+                "entry": 597731,
+                "entry_name": "Return of the Balrog"
+            },
+            {
+                "id": 3718688,
+                "event_total": 61,
+                "player_name": "Liam Wilson",
+                "rank": 16,
+                "last_rank": 17,
+                "rank_sort": 16,
+                "total": 2125,
+                "entry": 95983,
+                "entry_name": "Fiorentina Turner"
+            },
+            {
+                "id": 41717843,
+                "event_total": 34,
+                "player_name": "Tom Irving",
+                "rank": 17,
+                "last_rank": 16,
+                "rank_sort": 17,
+                "total": 2099,
+                "entry": 5325894,
+                "entry_name": "You Gee me the Doak"
+            },
+            {
+                "id": 24844541,
+                "event_total": 57,
+                "player_name": "Nico Gibson",
+                "rank": 18,
+                "last_rank": 18,
+                "rank_sort": 18,
+                "total": 2031,
+                "entry": 3058025,
+                "entry_name": "ColinPish"
+            },
+            {
+                "id": 25306622,
+                "event_total": 47,
+                "player_name": "Matthew Skene",
+                "rank": 19,
+                "last_rank": 19,
+                "rank_sort": 19,
+                "total": 1918,
+                "entry": 3614365,
+                "entry_name": "Onana what\u2019s ma name"
+            }
+        ]
+    }
+}

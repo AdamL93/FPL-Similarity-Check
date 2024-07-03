@@ -43,7 +43,7 @@ const TeamForm = () => {
             <label>Team Id</label>
             <input
                 type="text"
-                onChange={(e) => setTeamId(e.target.value)}
+                onChange={({target}) => setTeamId(target.value)}
                 value={teamId}
                 className={emptyFields.includes('teamId') ? 'error': ''}
 

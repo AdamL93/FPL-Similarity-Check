@@ -3,14 +3,17 @@ const mongoose = require('mongoose')
 const express = require('express')
 
 
-// express app
+// creates instance of an express app
 const app = express();
+
+//imports the routes defined in the routes teams folder.
 const teamRoutes = require('./routes/teams')
+const fplRoutes = require('./routes/fplDatabase.routes')
 
-//middle ware to log requests as they come in.
-
+//middleware to parse incoming json requests
 app.use(express.json())
 
+//middle ware to log requests as they come in.
 app.use((request, response, next) => {
     console.log(request.path, request.method)
     next()
@@ -18,6 +21,7 @@ app.use((request, response, next) => {
 
 // Uses routes in route teams file (attaches them to the app)
 app.use('/api/teams', teamRoutes)
+app.use('/api/fplDatabase', fplRoutes)
 
 
 // connect to database
