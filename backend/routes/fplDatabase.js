@@ -10,4 +10,4 @@ router.get('/', () => {})
 router.get('/:teamId', getGameweekData)
 
 
-module.exports = router 
+module.exports = router

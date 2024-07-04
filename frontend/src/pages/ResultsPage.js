@@ -29,7 +29,7 @@ const ResultsPage = (props) => {
 
   useEffect(() => {
     fetchData()
-  })
+  },[searchQuery])
 
   return (
     <div>
