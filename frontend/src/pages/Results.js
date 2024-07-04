@@ -1,11 +1,12 @@
-import { useEffect } from 'react'
+/*import { useEffect } from 'react'
 import {useTeamsContext} from "../hooks/useTeamsContext"
 
 //components
 import TeamDetails from '../components/TeamDetails'
 import TeamForm from '../components/TeamForm'
 
-const Result = () => {
+const Result = (props) => {
+    console.log(props)
     const {teams, dispatch} = useTeamsContext()
     //fetches data - tutorial 9
     useEffect(() => {
@@ -35,3 +36,5 @@ const Result = () => {
 }
 
 export default Result
+
+*/

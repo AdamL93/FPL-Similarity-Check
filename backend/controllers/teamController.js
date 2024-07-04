@@ -1,3 +1,4 @@
+/*
 const Team = require('../models/team.model')
 const mongoose = require('mongoose')
 
@@ -95,3 +96,5 @@ module.exports = {
     deleteTeam,
     updateTeam
 }
+
+*/

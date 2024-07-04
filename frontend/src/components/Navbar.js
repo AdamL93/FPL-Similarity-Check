@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import logo from '../resources/logo.png'
 
 
@@ -7,13 +7,13 @@ const Navbar = () => {
         <header>
             <div className="container">
                 {/*Can possibly reduce number of Links to neaten code*/}
-                <Link to="/Result">
                     <img src={logo} alt ="logo" className = "navbar-logo" />
-                </Link>
 
-                <Link to="/" className = "navbar-title">
+                <NavLink exact to="/" className = "navbar-title">
                     <h1> FPL TEAM SIMILARITY CHECK</h1>
-                </Link>
+                </NavLink>
+                                {/*Can possibly reduce number of Links to neaten code*/}
+                    <img src={logo} alt ="logo" className = "navbar-logo" />
             </div>
         </header>
     ) 

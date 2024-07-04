@@ -1,3 +1,4 @@
+/*
 const express = require('express')
 const {
     createTeam,
@@ -31,3 +32,5 @@ router.patch('/:id', updateTeam)
 
 
 module.exports = router
+
+*/

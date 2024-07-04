@@ -1,4 +1,4 @@
-import {createContext, useReducer} from 'react'
+/*import {createContext, useReducer} from 'react'
 
 export const TeamContext = createContext()
 
@@ -33,4 +33,4 @@ export const TeamsContextProvider = ({ children }) => {
         </TeamContext.Provider>
     )
 }
-
+*/

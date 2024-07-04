@@ -7,7 +7,7 @@ const express = require('express')
 const app = express();
 
 //imports the routes defined in the routes teams folder.
-const teamRoutes = require('./routes/teams')
+//const teamRoutes = require('./routes/teams')
 const fplRoutes = require('./routes/fplDatabase')
 
 //middleware to parse incoming json requests
@@ -20,7 +20,7 @@ app.use((request, response, next) => {
 })
 
 // Uses routes in route teams file (attaches them to the app)
-app.use('/api/teams', teamRoutes)
+//app.use('/api/teams', teamRoutes)
 app.use('/api/fplDatabase', fplRoutes)
 
 
