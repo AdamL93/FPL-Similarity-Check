@@ -3,7 +3,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-const ResultsPage = (props) => {
+const ResultsPage = () => {
 
   const location = useLocation();
   const { searchQuery } = location.state;
