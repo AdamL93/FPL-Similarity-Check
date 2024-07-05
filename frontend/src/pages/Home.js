@@ -1,23 +1,21 @@
 
 import SearchBar from '../components/SearchBar'
 import { useNavigate } from "react-router-dom"
-import React, { useState } from 'react';
+
 
 const Home = () => {
 
-    const [searchQuery, setSearchQuery] = useState('')
     const navigate = useNavigate()
 
-    const handleSearchSubmit = (query) => {
-        setSearchQuery(query);
-        console.log(query)
-        navigate('/ResultsPage', { state: { searchQuery: query } });
+    const handleSearchSubmit = (teamId, teamId2) => {
+        console.log(teamId, teamId2)
+        navigate('/ResultsPage', { state: { inputValue: teamId, inputValue2: teamId2 } });
     };
     
     
     return (
         <div className = "home">
-            <SearchBar onSearchSubmit={handleSearchSubmit}/>
+            <SearchBar handleSearchSubmit={handleSearchSubmit}/>
         </div>
     );
 };
