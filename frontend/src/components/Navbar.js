@@ -10,7 +10,6 @@ const Navbar = () => {
                 <NavLink exact to="/" className = "navbar-title">
                     <h1> FPL TEAM SIMILARITY CHECK</h1>
                 </NavLink>
-                    <img src={logo} alt ="logo" className = "navbar-logo" />
             </div>
         </header>
     ) 

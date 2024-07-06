@@ -11,7 +11,8 @@
   }
   
   .result-box {
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
+    border-radius: 15px ;
     padding: 20px;
     max-width: 600px; /* Adjust the width as needed */
     display: flex;
@@ -19,12 +20,3 @@
     align-items: center;
   }
   
-  .vertical-text {
-    white-space: pre-wrap; /* Ensures proper wrapping */
-    transform: rotate(90deg); /* Rotate text 90 degrees clockwise */
-    transform-origin: left top; /* Rotate from top-left corner */
-    writing-mode: vertical-lr; /* Vertical writing mode */
-    text-orientation: mixed; /* Compatibility with different browsers */
-    width: auto; /* Adjust as needed */
-    height: 100%; /* Ensures full height */
-  }

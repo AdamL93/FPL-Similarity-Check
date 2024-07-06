@@ -16,8 +16,8 @@ const ResultsPage = () => {
           const result = await response.json();
 
           if (response.ok) {
-            const formattedResulted = result.map(num => num.toString()).join(' ')
-            setResult(formattedResulted)
+            //const formattedResulted = result.map(num => num.toString()).join(' ')
+            setResult(JSON.stringify(result,null, 1))
 
             console.log('Response Ok');
           } else {
@@ -41,7 +41,10 @@ const ResultsPage = () => {
         <div className="result-container">
           <div className="result-box">
           <h1>THIS IS THE FIRST SET OF DATA</h1>
-          <pre>{result}</pre>
+          <ul>
+            {result}
+
+          </ul>
           </div>
       </div>
     </div>

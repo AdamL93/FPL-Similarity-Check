@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 //pages and components
 import Home from './pages/Home'
-import Result from './pages/Results'
 import Navbar from './components/Navbar'
 import ResultsPage from './pages/ResultsPage'
 
@@ -19,7 +18,6 @@ function App() {
       <div className="pages">
         <Routes>
           <Route exact path="/" element ={<Home searchResults={searchResults} setSearchResults={setSearchResults}/>} />
-          <Route path="/Result" element={<Result />}/>
           <Route path="/ResultsPage" element={<ResultsPage searchResults={searchResults} setSearchResults={setSearchResults}/>}/> 
         </Routes>
       </div>
