@@ -1,0 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/*Styling for ResultsPage */ 
+
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust the height as needed */
+  }
+  
+  .result-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 600px; /* Adjust the width as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .vertical-text {
+    white-space: pre-wrap; /* Ensures proper wrapping */
+    transform: rotate(90deg); /* Rotate text 90 degrees clockwise */
+    transform-origin: left top; /* Rotate from top-left corner */
+    writing-mode: vertical-lr; /* Vertical writing mode */
+    text-orientation: mixed; /* Compatibility with different browsers */
+    width: auto; /* Adjust as needed */
+    height: 100%; /* Ensures full height */
+  }

@@ -38,16 +38,31 @@ const getGameweekData = async (request, response) => {
             gameweekData2[gameWeek] = picks;
         });
 
-        console.log(gameweekData1)
-
+        console.log(gameweekData1.length)
         //comparison logic here
-
-    
-
-
-        console.log("test console log")
         
-        return response.status(200).json(JSON.stringify(gameweekData, null, 2));
+        //gets number of matches per gameweek.
+        const similarityArray = [] 
+        for (const key in gameweekData1) {
+
+            let gameweek1Array = gameweekData1[key]
+            let gameweek2Array = gameweekData2[key]
+
+            const elementMatches = gameweek1Array.filter(element => gameweek2Array.includes(element));
+            //console.log(`Gameweek ${key} matches:`, elementMatches.length);
+
+         //calculates simialrity percentages per gameweek and stores in array.
+            let similarityPercentage = (elementMatches.length/15)*100
+            //console.log(`Gameweek ${key} simlarity: ${similarityPercentage} %`);
+            similarityArray.push(similarityPercentage)
+
+          }
+          
+        
+
+        console.log("similarity Array:", similarityArray)
+        
+        return response.status(200).send(similarityArray);
 
 
     } catch (err) {
