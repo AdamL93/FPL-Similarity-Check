@@ -1,10 +1,5 @@
-const GameWeekDataModel = require('../models/gameweek.personal.model')
-const mongoose = require('mongoose')
 const fs = require('fs/promises');
 require('dotenv').config()
-
-
-
 
 const getGameweekData = async (request, response) => {
     const gameweekData1 = {};
@@ -53,8 +48,9 @@ const getGameweekData = async (request, response) => {
 
          //calculates simialrity percentages per gameweek and stores in array.
             let similarityPercentage = (elementMatches.length/15)*100
-            //console.log(`Gameweek ${key} simlarity: ${similarityPercentage} %`);
-            similarityArray.push(similarityPercentage)
+            let roundedSimilarityPercentage = Math.round(similarityPercentage)
+            console.log(`Gameweek ${key} simlarity: ${roundedSimilarityPercentage} %`);
+            similarityArray.push(roundedSimilarityPercentage + "%")
 
           }
           
