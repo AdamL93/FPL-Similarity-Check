@@ -3,20 +3,41 @@
 
 /*Styling for ResultsPage */ 
 
-.result-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh; /* Adjust the height as needed */
+  .banner {
+    width: 100%;
+    background-color: #00FF87;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #000000;
+    border-radius: 10px;
   }
-  
-  .result-box {
-    border: 5px solid #ccc;
-    border-radius: 15px ;
+  .team-id {
+    margin: 20px 0;
+    font-size: 18px;
+  }
+  .result-container {
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
     padding: 20px;
-    max-width: 600px; /* Adjust the width as needed */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  .result-box {
+    margin-top: 20px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  li:last-child {
+    border-bottom: none;
   }
   

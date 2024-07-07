@@ -17,7 +17,7 @@ const ResultsPage = () => {
 
           if (response.ok) {
             //const formattedResulted = result.map(num => num.toString()).join(' ')
-            setResult(JSON.stringify(result,null, 1))
+            setResult(result)
 
             console.log('Response Ok');
           } else {
@@ -35,17 +35,22 @@ const ResultsPage = () => {
 
   return (
     <div>
-      <h1>THIS IS THE RESULTS PAGE</h1>
-      <h2>The inputted team id is: {inputValue} </h2>
-      
-        <div className="result-container">
-          <div className="result-box">
-          <h1>THIS IS THE FIRST SET OF DATA</h1>
+      <div className="banner">Results</div>
+      <div className="team-id">
+        <span style={{ marginRight: '10px' }}>Team Id: {inputValue}</span>
+        Team Id 2: {inputValue2}
+      </div>
+      <div className="result-container">
+        <h2>Results List</h2>
+        <div className="result-box">
           <ul>
-            {result}
-
+            {result.length > 0 ? (
+              result.map((item, index) => <li key={index}>{item}</li>)
+            ) : (
+              <li>No data available</li>
+            )}
           </ul>
-          </div>
+        </div>
       </div>
     </div>
   );

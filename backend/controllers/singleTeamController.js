@@ -50,7 +50,7 @@ const getGameweekData = async (request, response) => {
             let similarityPercentage = (elementMatches.length/15)*100
             let roundedSimilarityPercentage = Math.round(similarityPercentage)
             console.log(`Gameweek ${key} simlarity: ${roundedSimilarityPercentage} %`);
-            similarityArray.push(roundedSimilarityPercentage + "%")
+            similarityArray.push("GW " + key + ": " + roundedSimilarityPercentage + "%")
 
           }
           

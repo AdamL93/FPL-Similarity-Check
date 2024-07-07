@@ -2,18 +2,18 @@
 /* NavBar css*/
 
 header {
-    background: #999999;
+    background: #dedee7;
   }
   header .container {
-    max-width: 1950px;
-    padding: 10px 0px;
+    max-width: auto;
+    padding: 0px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
   }
   header a {
-    color: #37003C;
+    color: #000120;
     text-decoration: none;
   }
 
@@ -26,10 +26,11 @@ header {
     width: 80px;
     height: auto;
     border-radius: 50%;
+    margin-left: 30px;
   }
 
   .container .navbar-title {
-    margin-right: 725px;
+    margin-right: 595px;
   }
   
 
