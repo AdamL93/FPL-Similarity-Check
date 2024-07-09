@@ -69,7 +69,7 @@ const ResultsPage = () => {
         <XAxis dataKey="gameweek" />
         <YAxis domain={[0, 100]} />
         <CartesianGrid stroke="grey" strokeDasharray="2 2" />
-        <Line type="monotone" dataKey="similarity" stroke="purple" strokeWidth={4} dot={false} />
+        <Line type="linear" dataKey="similarity" name ="Similarity %" stroke="purple" strokeWidth={2} dot={false} />
         <Legend />
         <Tooltip />
       </LineChart>
