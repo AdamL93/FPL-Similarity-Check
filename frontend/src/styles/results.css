@@ -6,7 +6,7 @@
 
 
 .results-page {
-    display: grid;
+    display: auto;
     grid-template-columns: auto auto;
     gap: 30px;
     padding-top: 50px;

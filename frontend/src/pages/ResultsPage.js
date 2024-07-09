@@ -43,7 +43,7 @@ const ResultsPage = () => {
     for (let i = 0; i<20;i++) {
       newData.push({
         day:i+1,
-        temp: (Math.random() * 20 + 20).toFixed(2),
+        similarity: (Math.random() * 20 + 20).toFixed(2),
         humidity:(Math.random() * 10 + 10).toFixed(2)
       })
     }
@@ -67,11 +67,6 @@ const ResultsPage = () => {
 
   return (
   <div>
-    <LineChart data={data} width={1000} height={300}>
-      <XAxis dataKey={"day"} />
-      <YAxis domain={[0,50]} type="number" />
-      
-    </LineChart>
     <div className="banner">Results</div>
     <div className="team-id">
       <span style={{ marginRight: '10px' }}>Team Id: {inputValue}</span>
@@ -80,7 +75,19 @@ const ResultsPage = () => {
     <div className = "results-page">
       <div className="overall-container">
           <h2>{result[38]}</h2>
-          
+      </div>
+      <div>
+        <LineChart width={500} height={300} data={data}>
+          <XAxis dataKey={"day"} />
+          <YAxis dataKey={"similarity"} domain={[0,100]} type="number"/>
+          <CartesianGrid stroke="grey" strokeDasharray="5 5"/>
+          <Line dataKey={"similarity"} stroke="purple" strokeWidth={4} isAnimationActive={false}/>
+          <Line dataKey={"humidity"} stroke="orange" strokeWidth={4} isAnimationActive={false}/>
+          <Legend />
+          <Tooltip content={<div>a</div>} />
+
+
+        </LineChart>
       </div>
       <div className="result-container">
         <h2>Gameweek Similarity</h2>
