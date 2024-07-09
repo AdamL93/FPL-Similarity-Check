@@ -10,7 +10,7 @@ const ResultsPage = () => {
 
   const location = useLocation();
   const { inputValue, inputValue2 } = location.state;
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState([]);
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
@@ -20,7 +20,6 @@ const ResultsPage = () => {
           const result = await response.json();
 
           if (response.ok) {
-            //const formattedResulted = result.map(num => num.toString()).join(' ')
             setResult(result)
 
             console.log('Response Ok');
@@ -39,21 +38,11 @@ const ResultsPage = () => {
   
 
   useEffect(() => {
-    const newData = []
-    for (let i = 0; i<20;i++) {
-      newData.push({
-        day:i+1,
-        similarity: (Math.random() * 20 + 20).toFixed(2),
-        humidity:(Math.random() * 10 + 10).toFixed(2)
-      })
-    }
-    setData(newData)
-  },[])
+    const newData = result.slice(0,-1).map((value, index) => ({ gameweek: index + 1, similarity: value }));
+    setData(newData);
+  }, [result]);
 
-
-  const getColorClassName = (item) => {
-
-    const number = parseFloat(item.split(':')[1].trim().replace('%', ''));
+  const getColorClassName = (number) => {
 
     if (number >= 60) {
       return 'red'; 
@@ -63,7 +52,6 @@ const ResultsPage = () => {
       return '';
     }
   };
-
 
   return (
   <div>
@@ -77,24 +65,21 @@ const ResultsPage = () => {
           <h2>{result[38]}</h2>
       </div>
       <div>
-        <LineChart width={500} height={300} data={data}>
-          <XAxis dataKey={"day"} />
-          <YAxis dataKey={"similarity"} domain={[0,100]} type="number"/>
-          <CartesianGrid stroke="grey" strokeDasharray="5 5"/>
-          <Line dataKey={"similarity"} stroke="purple" strokeWidth={4} isAnimationActive={false}/>
-          <Line dataKey={"humidity"} stroke="orange" strokeWidth={4} isAnimationActive={false}/>
-          <Legend />
-          <Tooltip content={<div>a</div>} />
-
-
-        </LineChart>
+      <LineChart width={500} height={300} data={data}>
+        <XAxis dataKey="gameweek" />
+        <YAxis domain={[0, 100]} />
+        <CartesianGrid stroke="grey" strokeDasharray="2 2" />
+        <Line type="monotone" dataKey="similarity" stroke="purple" strokeWidth={4} dot={false} />
+        <Legend />
+        <Tooltip />
+      </LineChart>
       </div>
       <div className="result-container">
         <h2>Gameweek Similarity</h2>
         <div className="result-box">
           <ul>
             {result.length > 0 ? (
-              result.map((item, index) => {
+              result.map((item, index) => { 
                 const className = getColorClassName(item);
                 return (
                   <li

@@ -50,16 +50,16 @@ const getGameweekData = async (request, response) => {
             const elementMatches = gameweek1Array.filter(element => gameweek2Array.includes(element));
             //console.log(`Gameweek ${key} matches:`, elementMatches.length);
 
-         //calculates simialrity percentages per gameweek and stores in array.
+         //calculates similarity percentages per gameweek and stores in array.
             let similarityPercentage = (elementMatches.length/15)*100
             let roundedSimilarityPercentage = Math.round(similarityPercentage)
             cumulativeSimilarity += roundedSimilarityPercentage
             console.log(`Gameweek ${key} simlarity: ${roundedSimilarityPercentage} %`);
-            similarityArray.push("Gameweek " + key + ": " + roundedSimilarityPercentage + "%")
+            similarityArray.push(roundedSimilarityPercentage)
 
           }
         let overallSimilarity = Math.round(cumulativeSimilarity/Object.keys(gameweekData1).length)
-        similarityArray.push("Overall Similarity: " + overallSimilarity + "%")
+        similarityArray.push(overallSimilarity)
 
           
         
