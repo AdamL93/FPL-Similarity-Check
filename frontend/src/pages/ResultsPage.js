@@ -2,12 +2,16 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend } from 'recharts';
+
+
 
 const ResultsPage = () => {
 
   const location = useLocation();
   const { inputValue, inputValue2 } = location.state;
   const [result, setResult] = useState('');
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
 
@@ -32,6 +36,19 @@ const ResultsPage = () => {
   useEffect(() => {
     fetchData()
   },[inputValue, inputValue2])
+  
+
+  useEffect(() => {
+    const newData = []
+    for (let i = 0; i<20;i++) {
+      newData.push({
+        day:i+1,
+        temp: (Math.random() * 20 + 20).toFixed(2),
+        humidity:(Math.random() * 10 + 10).toFixed(2)
+      })
+    }
+    setData(newData)
+  },[])
 
 
   const getColorClassName = (item) => {
@@ -47,8 +64,14 @@ const ResultsPage = () => {
     }
   };
 
+
   return (
   <div>
+    <LineChart data={data} width={1000} height={300}>
+      <XAxis dataKey={"day"} />
+      <YAxis domain={[0,50]} type="number" />
+      
+    </LineChart>
     <div className="banner">Results</div>
     <div className="team-id">
       <span style={{ marginRight: '10px' }}>Team Id: {inputValue}</span>
@@ -57,6 +80,7 @@ const ResultsPage = () => {
     <div className = "results-page">
       <div className="overall-container">
           <h2>{result[38]}</h2>
+          
       </div>
       <div className="result-container">
         <h2>Gameweek Similarity</h2>
