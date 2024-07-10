@@ -74,6 +74,7 @@ const ResultsPage = () => {
         <Tooltip />
       </LineChart>
       </div>
+      
       <div className="result-container">
         <h2>Gameweek Similarity</h2>
         <div className="result-box">

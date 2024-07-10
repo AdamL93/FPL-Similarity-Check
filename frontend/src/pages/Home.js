@@ -1,5 +1,6 @@
 
 import SearchBar from '../components/SearchBar'
+import Container from 'react-bootstrap/Container';
 import { useNavigate } from "react-router-dom"
 
 
@@ -14,9 +15,11 @@ const Home = () => {
     
     
     return (
-        <div className = "home">
-            <SearchBar handleSearchSubmit={handleSearchSubmit}/>
-        </div>
+        <Container fluid="md">
+            <div className = "home">
+                <SearchBar handleSearchSubmit={handleSearchSubmit}/>
+            </div>
+        </Container>
     );
 };
 
