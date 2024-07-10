@@ -59,13 +59,13 @@ const ResultsPage = () => {
   return (
   <Container fluid="xs">
     <Row className="banner">
-      <Col>Results </Col>
+      <Col>Results</Col>
     </Row>
-    <Row>
-      <div className="team-id">
-        <span style={{ marginRight: '10px' }}>Team Id: {inputValue}</span>
+    <Row className="team-id">
+      <Col>
+        <span style={{ marginRight: '40px' }}>Team Id: {inputValue}</span>
         Team Id 2: {inputValue2}
-      </div>
+      </Col>
     </Row>
     <Row className="gx-5">
       <Col className="result-container">
@@ -99,7 +99,7 @@ const ResultsPage = () => {
               <XAxis dataKey="gameweek" />
               <YAxis domain={[0, 100]} />
               <CartesianGrid stroke="grey" strokeDasharray="2 2" />
-              <Line type="linear" dataKey="similarity" name ="Similarity %" stroke="purple" strokeWidth={2} dot={false} />
+              <Line type="linear" dataKey="similarity" name ="Similarity % by Gameweek" stroke="purple" strokeWidth={2} dot={false} />
               <Legend />
               <Tooltip />
             </LineChart>

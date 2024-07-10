@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 //pages and components
 import Home from './pages/Home'
-import Navbar from './components/Navbar'
+import NavbarFunction from './components/Navbar'
 import ResultsPage from './pages/ResultsPage'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar />
+      <NavbarFunction />
       
       <div className="pages">
         <Routes>
