@@ -2,10 +2,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend } from 'recharts';
+import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend, BarChart, Bar, Rectangle } from 'recharts';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 
 
 
@@ -98,7 +99,7 @@ const ResultsPage = () => {
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
-            <LineChart width={500} height={300} data={data}>
+            <LineChart width={600} height={400} data={data}>
               <XAxis dataKey="gameweek" />
               <YAxis domain={[0, 100]} />
               <CartesianGrid stroke="grey" strokeDasharray="2 2" />
@@ -106,6 +107,18 @@ const ResultsPage = () => {
               <Legend />
               <Tooltip />
             </LineChart>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="mt-5 mb-5">
+            <BarChart width={600} height={400} data={data} margin={{top: 5,right: 30,left: 20,bottom: 5,}}>
+              <XAxis dataKey="gameweek" />
+              <YAxis domain={[0,100]}/>
+              <CartesianGrid stroke="grey" strokeDasharray="2 2" />
+              <Bar dataKey="similarity" name="Similarity %" fill="purple" activeBar={<Rectangle stroke="purple"/>} barSize ={8} barGap={1} />
+              <Legend />
+              <Tooltip />
+            </BarChart>
           </Col>
         </Row>
       </Col>
