@@ -57,7 +57,7 @@ const ResultsPage = () => {
   };
 
   return (
-  <Container fluid="md">
+  <Container fluid="xs">
     <Row className="banner">
       <Col>Results </Col>
     </Row>
@@ -93,10 +93,8 @@ const ResultsPage = () => {
         <Row className="overall-container">
           <Col>{`Overall Similarity: ${result[38]}%`}</Col>
         </Row>
-        <Row className = "gy-5">
-          <div></div>
-
-          
+        <Row>
+          <Col className="mt-5 mb-5">
             <LineChart width={500} height={300} data={data}>
               <XAxis dataKey="gameweek" />
               <YAxis domain={[0, 100]} />
@@ -105,6 +103,7 @@ const ResultsPage = () => {
               <Legend />
               <Tooltip />
             </LineChart>
+          </Col>
         </Row>
       </Col>
     </Row>
