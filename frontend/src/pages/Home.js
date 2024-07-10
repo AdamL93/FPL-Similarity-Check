@@ -15,10 +15,8 @@ const Home = () => {
     
     
     return (
-        <Container fluid="md">
-            <div className = "home">
+        <Container fluid="xs" className="home">
                 <SearchBar handleSearchSubmit={handleSearchSubmit}/>
-            </div>
         </Container>
     );
 };

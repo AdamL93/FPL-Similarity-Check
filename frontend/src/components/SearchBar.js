@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Container from 'react-bootstrap/Container';
 
 
 const SearchBar = ({handleSearchSubmit}) => {
@@ -12,8 +13,8 @@ const SearchBar = ({handleSearchSubmit}) => {
     }
     
     return (
+        <Container className="search-container" fluid="xs">
 
-        <div className = "search-container">
             <form onSubmit={handleFormSubmit}>
                 <h3>Team search</h3>
                 <label>Team Id's</label>
@@ -39,7 +40,7 @@ const SearchBar = ({handleSearchSubmit}) => {
                 />
                 <button type="submit" >Search</button>
             </form>  
-        </div>
+        </Container>
     )
 }
 
