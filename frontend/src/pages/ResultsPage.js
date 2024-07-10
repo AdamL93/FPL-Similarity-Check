@@ -16,28 +16,25 @@ const ResultsPage = () => {
   const [result, setResult] = useState([]);
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-
-      try {
-          const response = await fetch(`/api/fplDatabase/${inputValue}/${inputValue2}`);
-          const result = await response.json();
-
-          if (response.ok) {
-            setResult(result)
-
-            console.log('Response Ok');
-          } else {
-            throw new Error('Failed to fetch data');
-          }
-          
-        } catch (err) {
-          console.log("error occurred")
-        }
-  }
-
   useEffect(() => {
-    fetchData()
-  },[inputValue, inputValue2])
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/fplDatabase/${inputValue}/${inputValue2}`);
+        const result = await response.json();
+  
+        if (response.ok) {
+          setResult(result);
+          console.log('Response Ok');
+        } else {
+          throw new Error('Failed to fetch data');
+        }
+      } catch (err) {
+        console.log("error occurred")
+      }
+    };
+  
+    fetchData();
+  }, [inputValue, inputValue2]); 
   
 
   useEffect(() => {
@@ -45,16 +42,18 @@ const ResultsPage = () => {
     setData(newData);
   }, [result]);
 
-  const getColorClassName = (number) => {
+  const getSimilarityColour = (number) => {
 
     if (number >= 60) {
       return 'red'; 
     } else if (number < 40) {
       return 'green'; 
     } else {
-      return '';
+      return 'orange';
     }
   };
+
+  const overallSimilarityColour = getSimilarityColour(result[38]);
 
   return (
   <Container fluid="xs">
@@ -69,19 +68,16 @@ const ResultsPage = () => {
     </Row>
     <Row className="gx-5">
       <Col className="result-container">
-       
           <h2>Gameweek Similarity</h2>
             <ul>
               {result.length > 0 ? (
                 result.slice(0,-1).map((item, index) => { 
-                  const className = getColorClassName(item);
+                  const similarityColour = getSimilarityColour(item);
                   return (
-                    <li
-                      key={index}
-                      className={className}
-                    >
-                      {item}
-                    </li>
+                    <li key={index}>
+                    <span style={{ color: "purple"}}>{`GW ${index + 1}: `}</span>
+                    <span style={{ color: similarityColour, fontSize: '24px'}}>{`${item}%`}</span>
+                  </li>
                   );
                 })
               ) : (
@@ -91,7 +87,14 @@ const ResultsPage = () => {
       </Col>
       <Col>
         <Row className="overall-container">
-          <Col>{`Overall Similarity: ${result[38]}%`}</Col>
+          <Col>
+            <h2>
+              <span style={{ color: overallSimilarityColour}}>{`Overall Similarity: `}</span>
+              <span style={{ color: overallSimilarityColour}}>{`${result[38]}%`}</span>
+              
+            </h2>
+
+          </Col>
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
