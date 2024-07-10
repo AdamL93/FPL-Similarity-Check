@@ -3,25 +3,15 @@
 
 /*Styling for ResultsPage */ 
 
-
-
-.results-page {
-    display: auto;
-    grid-template-columns: auto auto;
-    gap: 30px;
-    padding-top: 50px;
-    padding-left: 0px;
-  }
-
   .banner {
-    width: 100%;
+
     background-color: #00FF87;
-    padding: 20px 0;
+    padding: 20px;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid #000000;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   
   .team-id {
@@ -30,17 +20,11 @@
   }
   
   .result-container {
-    width: 80%;
-    max-width: 600px;
     border: 1px solid #dee2e6;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-  }
-  
-  .result-box {
-    margin-top: 20px;
   }
   
   ul {
@@ -69,12 +53,11 @@
   }
 
   .overall-container {
-    width: 80%;
-    max-width: 600px;
     border: 1px solid #dee2e6;
+    font-size: 30px;
+    text-align: center;
     border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    margin-left: 700px;
-  }
+    padding: 20px;
+}

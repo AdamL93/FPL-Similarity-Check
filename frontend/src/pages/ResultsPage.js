@@ -3,6 +3,9 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend } from 'recharts';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -54,52 +57,58 @@ const ResultsPage = () => {
   };
 
   return (
-  <div>
-    <div className="banner">Results</div>
-    <div className="team-id">
-      <span style={{ marginRight: '10px' }}>Team Id: {inputValue}</span>
-      Team Id 2: {inputValue2}
-    </div>
-    <div className = "results-page">
-      <div className="overall-container">
-          <h2>{result[38]}</h2>
+  <Container fluid="md">
+    <Row className="banner">
+      <Col>Results </Col>
+    </Row>
+    <Row>
+      <div className="team-id">
+        <span style={{ marginRight: '10px' }}>Team Id: {inputValue}</span>
+        Team Id 2: {inputValue2}
       </div>
-      <div>
-      <LineChart width={500} height={300} data={data}>
-        <XAxis dataKey="gameweek" />
-        <YAxis domain={[0, 100]} />
-        <CartesianGrid stroke="grey" strokeDasharray="2 2" />
-        <Line type="linear" dataKey="similarity" name ="Similarity %" stroke="purple" strokeWidth={2} dot={false} />
-        <Legend />
-        <Tooltip />
-      </LineChart>
-      </div>
-      
-      <div className="result-container">
-        <h2>Gameweek Similarity</h2>
-        <div className="result-box">
-          <ul>
-            {result.length > 0 ? (
-              result.map((item, index) => { 
-                const className = getColorClassName(item);
-                return (
-                  <li
-                    key={index}
-                    className={className}
-                  >
-                    {item}
-                  </li>
-                );
-              })
-            ) : (
-              <li>No available data</li>
-            )}
-          </ul>
-        </div>
+    </Row>
+    <Row className="gx-5">
+      <Col className="result-container">
+       
+          <h2>Gameweek Similarity</h2>
+            <ul>
+              {result.length > 0 ? (
+                result.slice(0,-1).map((item, index) => { 
+                  const className = getColorClassName(item);
+                  return (
+                    <li
+                      key={index}
+                      className={className}
+                    >
+                      {item}
+                    </li>
+                  );
+                })
+              ) : (
+                <li>No available data</li>
+              )}
+            </ul>
+      </Col>
+      <Col>
+        <Row className="overall-container">
+          <Col>{`Overall Similarity: ${result[38]}%`}</Col>
+        </Row>
+        <Row className = "gy-5">
+          <div></div>
 
-      </div>
-    </div>
-  </div>
+          
+            <LineChart width={500} height={300} data={data}>
+              <XAxis dataKey="gameweek" />
+              <YAxis domain={[0, 100]} />
+              <CartesianGrid stroke="grey" strokeDasharray="2 2" />
+              <Line type="linear" dataKey="similarity" name ="Similarity %" stroke="purple" strokeWidth={2} dot={false} />
+              <Legend />
+              <Tooltip />
+            </LineChart>
+        </Row>
+      </Col>
+    </Row>
+  </Container>
   );
 }
 
