@@ -1,11 +1,14 @@
 // Results page
 import React from 'react';
+import AddProgressBar from '../components/ProgressBar';
+import AddSwitch from '../components/Filter'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend, BarChart, Bar, Rectangle } from 'recharts';
+import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend, BarChart, Bar, Rectangle} from 'recharts';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 
 
 const ResultsPage = () => {
@@ -14,6 +17,8 @@ const ResultsPage = () => {
   const { inputValue, inputValue2 } = location.state;
   const [result, setResult] = useState([]);
   const [data, setData] = useState([]);
+  const [filterState, setFilterState] = useState(false);
+  const [filteredResult, setFilteredResult] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +59,10 @@ const ResultsPage = () => {
 
   const overallSimilarityColour = getSimilarityColour(result[result.length - 1]);
 
+  const toggleFilter = () => {
+    setFilterState(!filterState)
+  }
+
   return (
   <Container fluid="xs">
     <Row className="banner gx-5">
@@ -67,16 +76,21 @@ const ResultsPage = () => {
     </Row>
     <Row className="gx-5">
       <Col className="result-container">
+        <div className="d-flex justify-content-between align-items-center mb-3">
           <h2>Gameweek Similarity</h2>
+          <AddSwitch label="Filter > 50%" onToggle={toggleFilter} />
+        </div>
+        
             <ul>
               {result.length > 0 ? (
-                result.slice(0,-1).map((item, index) => { 
-                  const similarityColour = getSimilarityColour(item);
+                result.slice(0,-1).map((similarityPercentage, index) => { 
+                  const similarityColour = getSimilarityColour(similarityPercentage);
                   return (
                     <li key={index}>
-                    <span style={{ color: "purple"}}>{`GW ${index + 1}: `}</span>
-                    <span style={{ color: similarityColour, fontSize: '24px'}}>{`${item}%`}</span>
-                  </li>
+                      <span style={{ color: "purple"}}>{`GW ${index + 1}: `}</span>
+                      <span style={{ color: similarityColour, fontSize: '24px'}}>{`${similarityPercentage}%`}</span>
+                      {AddProgressBar(similarityPercentage)}
+                    </li>
                   );
                 })
               ) : (
@@ -88,9 +102,9 @@ const ResultsPage = () => {
         <Row className="overall-container">
           <Col>
             <h2>
-              <span style={{ color: overallSimilarityColour}}>{`Overall Similarity: `}</span>
-              <span style={{ color: overallSimilarityColour}}>{`${result[result.length - 1]}%`}</span>
-              
+              <span style={{ color: overallSimilarityColour}}>
+                {`Overall Similarity: ${result[result.length - 1]}%`}
+              </span>
             </h2>
 
           </Col>
