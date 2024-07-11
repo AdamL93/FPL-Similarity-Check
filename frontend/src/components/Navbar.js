@@ -3,16 +3,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Image from 'react-bootstrap/Image';
 
-const NavbarFunction = () => {
+const NavbarHeader = () => {
     return (
       
         <Navbar expand="lg" className="navbar-header">
           <Container>
             <Navbar.Brand href="/">
-              <img
-                  src={logo}
-                  className="navbar-logo"
+              <Image className="navbar-logo"
+                  src={logo} 
                   alt="logo"
                 />
             </Navbar.Brand>
@@ -37,4 +37,4 @@ const NavbarFunction = () => {
     );
   }
 
-export default NavbarFunction;
+export default NavbarHeader;

@@ -8,8 +8,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-
-
 const ResultsPage = () => {
 
   const location = useLocation();
@@ -54,11 +52,11 @@ const ResultsPage = () => {
     }
   };
 
-  const overallSimilarityColour = getSimilarityColour(result[38]);
+  const overallSimilarityColour = getSimilarityColour(result[result.length - 1]);
 
   return (
   <Container fluid="xs">
-    <Row className="banner">
+    <Row className="banner gx-5">
       <Col>Results</Col>
     </Row>
     <Row className="team-id">
@@ -91,7 +89,7 @@ const ResultsPage = () => {
           <Col>
             <h2>
               <span style={{ color: overallSimilarityColour}}>{`Overall Similarity: `}</span>
-              <span style={{ color: overallSimilarityColour}}>{`${result[38]}%`}</span>
+              <span style={{ color: overallSimilarityColour}}>{`${result[result.length - 1]}%`}</span>
               
             </h2>
 
