@@ -1,13 +1,13 @@
 import Form from 'react-bootstrap/Form';
 
-function AddSwitch({ label, onToggle }) {
+function AddSwitch({ label, onChange }) {
     return (
       <Form>
         <Form.Check
           type="switch"
           id="switch"
           label={label}
-          onToggle={onToggle}
+          onChange={onChange}
         />
       </Form>
     );

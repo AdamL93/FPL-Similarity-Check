@@ -4,7 +4,8 @@ import AddProgressBar from '../components/ProgressBar';
 import AddSwitch from '../components/Filter'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend, BarChart, Bar, Rectangle} from 'recharts';
+import BarChartComponent from '../components/BarChart';
+import LineChartComponent from '../components/LineChart';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -37,14 +38,23 @@ const ResultsPage = () => {
       }
     };
   
+
+    
     fetchData();
   }, [inputValue, inputValue2]); 
   
-
+//needs better naming instead of newData
   useEffect(() => {
     const newData = result.slice(0,-1).map((value, index) => ({ gameweek: index + 1, similarity: value }));
     setData(newData);
-  }, [result]);
+
+    if (filterState) {
+      const filteredResults = result.filter(similarityPercent => similarityPercent >= 40);
+      setFilteredResult(filteredResults);
+    } else {
+      setFilteredResult(result);
+    }
+  }, [result, filterState]);
 
   const getSimilarityColour = (number) => {
 
@@ -57,11 +67,11 @@ const ResultsPage = () => {
     }
   };
 
-  const overallSimilarityColour = getSimilarityColour(result[result.length - 1]);
+  const overallSimilarityColour = getSimilarityColour(filteredResult[filteredResult.length - 1]);
 
   const toggleFilter = () => {
-    setFilterState(!filterState)
-  }
+  setFilterState(prevState => !prevState);
+};
 
   return (
   <Container fluid="xs">
@@ -78,12 +88,12 @@ const ResultsPage = () => {
       <Col className="result-container">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2>Gameweek Similarity</h2>
-          <AddSwitch label="Filter > 50%" onToggle={toggleFilter} />
+          <AddSwitch label="Filter > 50%" onChange={toggleFilter} />
         </div>
         
             <ul>
-              {result.length > 0 ? (
-                result.slice(0,-1).map((similarityPercentage, index) => { 
+              {filteredResult.length > 0 ? (
+                filteredResult.slice(0,-1).map((similarityPercentage, index) => { 
                   const similarityColour = getSimilarityColour(similarityPercentage);
                   return (
                     <li key={index}>
@@ -103,7 +113,7 @@ const ResultsPage = () => {
           <Col>
             <h2>
               <span style={{ color: overallSimilarityColour}}>
-                {`Overall Similarity: ${result[result.length - 1]}%`}
+                {`Overall Similarity: ${filteredResult[filteredResult.length - 1]}%`}
               </span>
             </h2>
 
@@ -111,26 +121,12 @@ const ResultsPage = () => {
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
-            <LineChart width={600} height={400} data={data}>
-              <XAxis dataKey="gameweek" />
-              <YAxis domain={[0, 100]} />
-              <CartesianGrid stroke="grey" strokeDasharray="2 2" />
-              <Line type="linear" dataKey="similarity" name ="Similarity % by Gameweek" stroke="purple" strokeWidth={2} dot={false} />
-              <Legend />
-              <Tooltip />
-            </LineChart>
+            <LineChartComponent data={data}/>
           </Col>
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
-            <BarChart width={600} height={400} data={data} margin={{top: 5,right: 30,left: 20,bottom: 5,}}>
-              <XAxis dataKey="gameweek" />
-              <YAxis domain={[0,100]}/>
-              <CartesianGrid stroke="grey" strokeDasharray="2 2" />
-              <Bar dataKey="similarity" name="Similarity %" fill="purple" activeBar={<Rectangle stroke="purple"/>} barSize ={8} barGap={1} />
-              <Legend />
-              <Tooltip />
-            </BarChart>
+            <BarChartComponent data={data}/>
           </Col>
         </Row>
       </Col>
