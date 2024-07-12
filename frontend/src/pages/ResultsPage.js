@@ -17,6 +17,7 @@ const ResultsPage = () => {
   const location = useLocation();
   const { inputValue, inputValue2 } = location.state;
   const [result, setResult] = useState([]);
+  const [overallSimilarity, setOverallSimilarity] = useState();
   const [data, setData] = useState([]);
   const [filterState, setFilterState] = useState(false);
   const [filteredResult, setFilteredResult] = useState([]);
@@ -25,10 +26,11 @@ const ResultsPage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/fplDatabase/${inputValue}/${inputValue2}`);
-        const result = await response.json();
+        const responseResult = await response.json();
   
         if (response.ok) {
-          setResult(result);
+          setResult(responseResult.slice(0,-1));
+          setOverallSimilarity(responseResult[responseResult.length - 1])
           console.log('Response Ok');
         } else {
           throw new Error('Failed to fetch data');
@@ -45,7 +47,7 @@ const ResultsPage = () => {
   
 //needs better naming instead of newData
   useEffect(() => {
-    const newData = result.slice(0,-1).map((value, index) => ({ gameweek: index + 1, similarity: value }));
+    const newData = result.map((value, index) => ({ gameweek: index + 1, similarity: value }));
     setData(newData);
 
     if (filterState) {
@@ -67,7 +69,7 @@ const ResultsPage = () => {
     }
   };
 
-  const overallSimilarityColour = getSimilarityColour(filteredResult[filteredResult.length - 1]);
+  const overallSimilarityColour = getSimilarityColour(overallSimilarity);
 
   const toggleFilter = () => {
   setFilterState(prevState => !prevState);
@@ -93,7 +95,7 @@ const ResultsPage = () => {
         
             <ul>
               {filteredResult.length > 0 ? (
-                filteredResult.slice(0,-1).map((similarityPercentage, index) => { 
+                filteredResult.map((similarityPercentage, index) => { 
                   const similarityColour = getSimilarityColour(similarityPercentage);
                   return (
                     <li key={index}>
@@ -113,7 +115,7 @@ const ResultsPage = () => {
           <Col>
             <h2>
               <span style={{ color: overallSimilarityColour}}>
-                {`Overall Similarity: ${filteredResult[filteredResult.length - 1]}%`}
+                {`Overall Similarity: ${overallSimilarity}%`}
               </span>
             </h2>
 
