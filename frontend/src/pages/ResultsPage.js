@@ -88,7 +88,7 @@ const ResultsPage = () => {
       <Col className="result-container">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2>Gameweek Similarity</h2>
-          <AddSwitch label="Filter > 50%" onChange={toggleFilter} />
+          <AddSwitch label="Filter > 40%" onChange={toggleFilter} />
         </div>
         
             <ul>
