@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import BarChartComponent from '../components/BarChart';
 import LineChartComponent from '../components/LineChart';
+import PieChartComponent from '../components/PieChart';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -118,8 +119,12 @@ const ResultsPage = () => {
                 {`Overall Similarity: ${overallSimilarity}%`}
               </span>
             </h2>
-
           </Col>
+        </Row>
+        <Row className ="overall-container">
+              <Col className="mt-n5 mb-n5">
+                <PieChartComponent similarityPrcentage={overallSimilarity}/>
+              </Col>
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
