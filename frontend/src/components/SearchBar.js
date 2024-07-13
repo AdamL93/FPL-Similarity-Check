@@ -34,8 +34,7 @@ const SearchBar = ({handleSearchSubmit}) => {
                     value={inputValue2}
                     onChange={({target}) => {
                     console.log(target.value)
-                    setInputValue2(target.value)}
-                    
+                    setInputValue2(target.value)}  
                 }
                 />
                 <button type="submit" >Search</button>

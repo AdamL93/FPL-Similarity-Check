@@ -96,13 +96,13 @@ const ResultsPage = () => {
         
         <ul>
           {filteredResult.length > 0 ? (
-            filteredResult.map((result, index) => { 
-              const similarityColour = getSimilarityColour(result.similarity);
+            filteredResult.map((resultObject, index) => { 
+              const similarityColour = getSimilarityColour(resultObject.similarity);
               return (
                 <li key={index}>
-                  <span style={{ color: "purple" }}>{`GW ${result.gameweek}: `}</span>
-                  <span style={{ color: similarityColour, fontSize: '24px' }}>{`${result.similarity}%`}</span>
-                  {AddProgressBar(result.similarity)}
+                  <span style={{ color: "purple" }}>{`GW ${resultObject.gameweek}: `}</span>
+                  <span style={{ color: similarityColour, fontSize: '24px' }}>{`${resultObject.similarity}%`}</span>
+                  {AddProgressBar(resultObject.similarity)}
                 </li>
               );
             })
@@ -119,13 +119,12 @@ const ResultsPage = () => {
                 {`Overall Similarity: ${overallSimilarity}%`}
               </span>
             </h2>
+            <Row className ="overall-container">
+                <PieChartComponent similarityPrcentage={overallSimilarity}/>
+            </Row>
           </Col>
         </Row>
-        <Row className ="overall-container">
-              <Col className="mt-n5 mb-n5">
-                <PieChartComponent similarityPrcentage={overallSimilarity}/>
-              </Col>
-        </Row>
+
         <Row>
           <Col className="mt-5 mb-5">
             <LineChartComponent data={mappedResults}/>
