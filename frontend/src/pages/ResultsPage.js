@@ -18,7 +18,7 @@ const ResultsPage = () => {
   const { inputValue, inputValue2 } = location.state;
   const [result, setResult] = useState([]);
   const [overallSimilarity, setOverallSimilarity] = useState();
-  const [data, setData] = useState([]);
+  const [mappedResults, setMappedResults] = useState([]);
   const [filterState, setFilterState] = useState(false);
   const [filteredResult, setFilteredResult] = useState([]);
 
@@ -47,14 +47,14 @@ const ResultsPage = () => {
   
 //needs better naming instead of newData
   useEffect(() => {
-    const newData = result.map((value, index) => ({ gameweek: index + 1, similarity: value }));
-    setData(newData);
+    const mappedResults = result.map((value, index) => ({ gameweek: index + 1, similarity: value }));
+    setMappedResults(mappedResults);
 
     if (filterState) {
-      const filteredResults = result.filter(similarityPercent => similarityPercent >= 40);
+      const filteredResults = mappedResults.filter(object => object.similarity >= 40);
       setFilteredResult(filteredResults);
     } else {
-      setFilteredResult(result);
+      setFilteredResult(mappedResults);
     }
   }, [result, filterState]);
 
@@ -93,22 +93,22 @@ const ResultsPage = () => {
           <AddSwitch label="Filter > 40%" onChange={toggleFilter} />
         </div>
         
-            <ul>
-              {filteredResult.length > 0 ? (
-                filteredResult.map((similarityPercentage, index) => { 
-                  const similarityColour = getSimilarityColour(similarityPercentage);
-                  return (
-                    <li key={index}>
-                      <span style={{ color: "purple"}}>{`GW ${index + 1}: `}</span>
-                      <span style={{ color: similarityColour, fontSize: '24px'}}>{`${similarityPercentage}%`}</span>
-                      {AddProgressBar(similarityPercentage)}
-                    </li>
-                  );
-                })
-              ) : (
-                <li>No available data</li>
-              )}
-            </ul>
+        <ul>
+          {filteredResult.length > 0 ? (
+            filteredResult.map((result, index) => { 
+              const similarityColour = getSimilarityColour(result.similarity);
+              return (
+                <li key={index}>
+                  <span style={{ color: "purple" }}>{`GW ${result.gameweek}: `}</span>
+                  <span style={{ color: similarityColour, fontSize: '24px' }}>{`${result.similarity}%`}</span>
+                  {AddProgressBar(result.similarity)}
+                </li>
+              );
+            })
+          ) : (
+            <li>No available data</li>
+          )}
+        </ul>
       </Col>
       <Col>
         <Row className="overall-container">
@@ -123,12 +123,12 @@ const ResultsPage = () => {
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
-            <LineChartComponent data={data}/>
+            <LineChartComponent data={mappedResults}/>
           </Col>
         </Row>
         <Row>
           <Col className="mt-5 mb-5">
-            <BarChartComponent data={data}/>
+            <BarChartComponent data={mappedResults}/>
           </Col>
         </Row>
       </Col>
