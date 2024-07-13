@@ -119,10 +119,18 @@ const ResultsPage = () => {
                 {`Overall Similarity: ${overallSimilarity}%`}
               </span>
             </h2>
-            <Row className ="overall-container">
-                <PieChartComponent similarityPrcentage={overallSimilarity}/>
-            </Row>
           </Col>
+          <Row className ="overall-container">
+            <Col>
+            </Col>
+            <Col>
+                  <PieChartComponent similarityPrcentage={overallSimilarity}/>
+            </Col>
+            <Col>
+            </Col>
+          </Row>
+            
+          
         </Row>
 
         <Row>

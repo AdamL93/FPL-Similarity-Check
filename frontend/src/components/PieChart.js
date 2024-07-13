@@ -23,7 +23,7 @@ function PieChartComponent({ similarityPrcentage }) {
           label
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index]} />
+            <Cell key={`${index}`} fill={colors[index]} />
           ))}
 
         </Pie>
