@@ -11,14 +11,19 @@ function BarChartComponent({ data }) {
             interval={0} 
             tick={{ fontSize: 12 }} 
             label={{ value: 'Gameweek Number', 
-                    position: 'insideBottom', 
-                    offset: -5 }}
+                position: 'insideBottom', 
+                offset: -5,
+                style: { fontWeight: '500', fill: '#4A4A4A' }
+            }}
             />
             <YAxis 
             domain={[0,100]} 
             label={{ value: 'Similarity %', 
-                    angle: -90, 
-                    position: 'insideLeft', dy:40 }} 
+                angle: -90, 
+                position: 'insideLeft', 
+                dy:40,
+                style: { fontWeight: '500', fill: '#4A4A4A' }
+            }} 
             />
             <CartesianGrid stroke="grey" strokeDasharray="2 2" />
             <Bar dataKey="similarity" name="Similarity %" fill="purple" activeBar={<Rectangle stroke="purple"/>} barSize ={8} barGap={1} />

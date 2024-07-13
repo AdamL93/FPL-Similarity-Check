@@ -12,14 +12,18 @@ function LineChartComponent({ data }) {
                 tick={{ fontSize: 12 }} 
                 label={{ value: 'Gameweek Number', 
                         position: 'insideBottom', 
-                        offset: -5 }} 
+                        offset: -5,
+                        style: { fontWeight: '500', fill: '#4A4A4A' }
+                    }}
             />
             <YAxis 
             domain={[0, 100]} 
             label={{ value: 'Similarity %', 
                     angle: -90, 
                     position: 'insideLeft', 
-                    dy:40 }} 
+                    dy:40,
+                    style: { fontWeight: '500', fill: '#4A4A4A' }
+                }} 
             />
             <CartesianGrid stroke="grey" strokeDasharray="2 2" />
             <Line type="linear" dataKey="similarity" name ="Similarity %" stroke="purple" strokeWidth={2} dot={false} />
