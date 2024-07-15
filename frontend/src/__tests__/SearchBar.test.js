@@ -4,13 +4,14 @@ import '@testing-library/jest-dom/extend-expect';
 import SearchBar from '../components/SearchBar';
 
 describe(SearchBar, () => {
-    test('Should update inputValue state with inputted values', () => {
+    it('Should update and render inputValue state with inputed values', () => {
+
+        //renders component to test (tells what component i'd like to test)
         render(<SearchBar handleSearchSubmit={jest.fn()} />);
 
-        //checks if placehodler text is rendered correctly.
+        //gets element to be tested by definition 
         const input1 = screen.getByPlaceholderText('Enter team id');
         const input2 = screen.getByPlaceholderText('Enter second team id');
-
 
         //
         fireEvent.change(input1, { target: { value: '123' } });
@@ -29,18 +30,18 @@ describe(SearchBar, () => {
 
     });
 
-    test('should call handleSearchSubmit with correct values on form submit', () => {
+    it('should call handleSearchSubmit with correct values on form submit', () => {
         const handleSearchSubmit = jest.fn();
         render(<SearchBar handleSearchSubmit={handleSearchSubmit} />);
 
         const input1 = screen.getByPlaceholderText('Enter team id');
         const input2 = screen.getByPlaceholderText('Enter second team id');
-        const submitButton = screen.getByRole('button', { name: /search/i });
+        const searchButton = screen.getByRole('button', { name: /search/i });
 
         fireEvent.change(input1, { target: { value: '123' } });
         fireEvent.change(input2, { target: { value: '456' } });
 
-        fireEvent.click(submitButton);
+        fireEvent.click(searchButton);
 
         expect(handleSearchSubmit).toHaveBeenCalledWith('123', '456');
     });
