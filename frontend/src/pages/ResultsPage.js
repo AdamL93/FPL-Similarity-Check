@@ -7,10 +7,10 @@ import FetchData from '../components/FetchComparisonData';
 import ResultsList from '../components/ResultsList';
 import TeamDetails from '../components/TeamDetails';
 import MappedResults from '../components/MapResults';
+import GetSimilarityColour from '../components/GetSimilarityColour';
 
 import BarChartComponent from '../components/BarChart';
 import LineChartComponent from '../components/LineChart';
-import PieChartComponent from '../components/PieChart';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -44,7 +44,7 @@ const ResultsPage = () => {
     const mappedResults = MappedResults(result)
     setMappedResults(mappedResults);
 
-//check if filter is on 
+//Filters results if filter switch is on
     if (filterState) {
       const filteredResults = mappedResults.filter(object => object.similarity >= 40);
       setFilteredResult(filteredResults);
@@ -53,18 +53,8 @@ const ResultsPage = () => {
     }
   }, [result, filterState]);
 
-  const getSimilarityColour = (number) => {
-
-    if (number >= 60) {
-      return 'red'; 
-    } else if (number < 40) {
-      return 'green'; 
-    } else {
-      return 'orange';
-    }
-  };
-
-  const overallSimilarityColour = getSimilarityColour(overallSimilarity);
+  
+  const similarityColour = GetSimilarityColour(overallSimilarity);
 
   const toggleFilter = () => {
   setFilterState(prevState => !prevState);
@@ -80,13 +70,13 @@ const ResultsPage = () => {
       <ResultsList
             filteredResult={filteredResult}
             toggleFilter={toggleFilter}
-            getSimilarityColour={getSimilarityColour}
+            getSimilarityColour={GetSimilarityColour}
           />
       <Col>
         <Row className="overall-container">
           <Col>
             <h2>
-              <span style={{ color: overallSimilarityColour}}>
+              <span style={{ color: similarityColour}}>
                 {`Overall Similarity: ${overallSimilarity}%`}
               </span>
             </h2>
