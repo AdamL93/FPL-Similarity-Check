@@ -1,6 +1,5 @@
 import AddSwitch from '../components/Filter';
 import AddProgressBar from '../components/ProgressBar';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const ResultsList = ({ filteredResult, toggleFilter, getSimilarityColour }) => (
