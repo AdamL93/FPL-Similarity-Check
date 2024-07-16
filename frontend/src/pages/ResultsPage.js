@@ -1,5 +1,6 @@
 // Results page
 import React from 'react';
+import FetchData from '../components/FetchComparisonData';
 import AddProgressBar from '../components/ProgressBar';
 import AddSwitch from '../components/Filter'
 import { useLocation } from 'react-router-dom'
@@ -23,30 +24,19 @@ const ResultsPage = () => {
   const [filterState, setFilterState] = useState(false);
   const [filteredResult, setFilteredResult] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/fplDatabase/${inputValue}/${inputValue2}`);
-        const responseResult = await response.json();
-  
-        if (response.ok) {
-          setResult(responseResult.slice(0,-1));
-          setOverallSimilarity(responseResult[responseResult.length - 1])
-          console.log('Response Ok');
-        } else {
-          throw new Error('Failed to fetch data');
-        }
-      } catch (err) {
-        console.log("error occurred")
-      }
-    };
-  
 
-    
-    fetchData();
-  }, [inputValue, inputValue2]); 
+// Calls Fetch data component to compare two teams on page render.
+  useEffect(() => {
+    const FetchApiData= async () => {
+      const { result: fetchedResult, overallSimilarity: fetchedOverallSimilarity } = await FetchData(inputValue, inputValue2);
+      setResult(fetchedResult);
+      setOverallSimilarity(fetchedOverallSimilarity);
+    };
+
+    FetchApiData();
+  }, [inputValue, inputValue2]);
   
-//needs better naming instead of newData
+//Calls map component to 
   useEffect(() => {
     const mappedResults = result.map((value, index) => ({ gameweek: index + 1, similarity: value }));
     setMappedResults(mappedResults);
@@ -112,7 +102,7 @@ const ResultsPage = () => {
         </ul>
       </Col>
       <Col>
-        <Row className="overall-container">
+        <Row className="result-container">
           <Col>
             <h2>
               <span style={{ color: overallSimilarityColour}}>
@@ -120,7 +110,7 @@ const ResultsPage = () => {
               </span>
             </h2>
           </Col>
-          <Row className ="overall-container">
+          <Row className ="result-container">
             <Col>
             </Col>
             <Col>
