@@ -13,18 +13,12 @@ describe(AddSwitch, () => {
     })
 
     it('calls toggleSwtich function when the switch is clicked', () => {
+
     const toggleSwitch = jest.fn();
-    
-    // Render the component
+
     render(<AddSwitch label="Test Switch" onChange={toggleSwitch} />);
-    
-    // Get the switch element by role
     const switchElement = screen.getByRole('checkbox');
-    
-    // mimics click event
     fireEvent.click(switchElement);
-    
-    // Check if the toggleSwitch function was called exactly once.
     expect(toggleSwitch).toHaveBeenCalledTimes(1);
     })
 

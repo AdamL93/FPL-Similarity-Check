@@ -42,8 +42,6 @@ describe(LineChartComponent, () => {
     });
 
 
-    
-
 /*  CHECKS FOR NUMBER OF DATA POITNS ON THE LINE. NOT WORKING JUST NOW THOUGH "CIRCLES" IS NOT RECOGNISED.
     
     it('Should render correct number of data points on each line', async () => {
@@ -54,29 +52,4 @@ describe(LineChartComponent, () => {
                 expect(dataPoints.length).toBe(testData.length);
             });
         });
-    });
-
-
-*/
-    /* NOT SURE IF NECESSARY? THIRS PARTY LIBRARIES.
-
-
-    it('renders XAxis label', () => {
-        // Check XAxis label
-        const xAxisLabel = screen.getByLabelText(/Gameweek Number/i);
-        expect(xAxisLabel).toBeInTheDocument();
-    });
-
-  it('renders YAxis label', () => {
-    // Check YAxis label
-    const yAxisLabel = screen.getByLabelText(/Similarity %/i);
-    expect(yAxisLabel).toBeInTheDocument();
-  });
-
-  it('renders Legend', () => {
-    // Check Legend
-    const legend = screen.getByText(/Similarity %/i); // Check for legend text
-    expect(legend).toBeInTheDocument();
-  });
-
-  */
+    }); */
