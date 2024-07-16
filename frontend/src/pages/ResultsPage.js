@@ -102,7 +102,7 @@ const ResultsPage = () => {
                 <li key={index}>
                   <span style={{ color: "purple" }}>{`GW ${resultObject.gameweek}: `}</span>
                   <span style={{ color: similarityColour, fontSize: '24px' }}>{`${resultObject.similarity}%`}</span>
-                  {AddProgressBar(resultObject.similarity)}
+                  {<AddProgressBar progressNumber={resultObject.similarity}/>}
                 </li>
               );
             })
