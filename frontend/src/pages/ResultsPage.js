@@ -1,10 +1,12 @@
 // Results page
 import React from 'react';
-import FetchData from '../components/FetchComparisonData';
-import AddProgressBar from '../components/ProgressBar';
-import AddSwitch from '../components/Filter'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+
+import FetchData from '../components/FetchComparisonData';
+import ResultsList from '../components/ResultsList';
+import TeamDetails from '../components/TeamDetails';
+
 import BarChartComponent from '../components/BarChart';
 import LineChartComponent from '../components/LineChart';
 import PieChartComponent from '../components/PieChart';
@@ -71,36 +73,13 @@ const ResultsPage = () => {
     <Row className="banner gx-5">
       <Col>Results</Col>
     </Row>
-    <Row className="team-id">
-      <Col>
-        <span style={{ marginRight: '40px' }}>Team Id: {inputValue}</span>
-        Team Id 2: {inputValue2}
-      </Col>
-    </Row>
+      <TeamDetails inputValue={inputValue} inputValue2={inputValue2} />
     <Row className="gx-5">
-      <Col className="result-container">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h2>Gameweek Similarity</h2>
-          <AddSwitch label="Filter > 40%" onChange={toggleFilter} />
-        </div>
-        
-        <ul>
-          {filteredResult.length > 0 ? (
-            filteredResult.map((resultObject, index) => { 
-              const similarityColour = getSimilarityColour(resultObject.similarity);
-              return (
-                <li key={index}>
-                  <span style={{ color: "purple" }}>{`GW ${resultObject.gameweek}: `}</span>
-                  <span style={{ color: similarityColour, fontSize: '24px' }}>{`${resultObject.similarity}%`}</span>
-                  {<AddProgressBar progressNumber={resultObject.similarity}/>}
-                </li>
-              );
-            })
-          ) : (
-            <li>No available data</li>
-          )}
-        </ul>
-      </Col>
+      <ResultsList
+            filteredResult={filteredResult}
+            toggleFilter={toggleFilter}
+            getSimilarityColour={getSimilarityColour}
+          />
       <Col>
         <Row className="overall-container">
           <Col>
@@ -119,8 +98,6 @@ const ResultsPage = () => {
             <Col>
             </Col>
           </Row>
-            
-          
         </Row>
 
         <Row>
