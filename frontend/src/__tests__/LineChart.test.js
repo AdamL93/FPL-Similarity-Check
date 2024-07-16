@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import LineChartComponent from '../components/LineChart';
 
 describe(LineChartComponent, () => {
@@ -22,15 +22,13 @@ describe(LineChartComponent, () => {
         expect(lineChart).toBeInTheDocument();
     });
 
-    it('Should render lines on the line chart', async () => {
+    it('Should render lines on the line chart', () => {
         // Checks number of lines that have been rendered on the chart.
         render(<LineChartComponent data={testData}/>);
     
-        // is waitfor necessary?
-        await waitFor(() => {
-            const lines = document.querySelectorAll('.recharts-line');
-            expect(lines.length).toBeGreaterThan(0);
-        });
+        const lines = document.querySelectorAll('.recharts-line');
+        expect(lines.length).toBeGreaterThan(0);
+       
     });
 
 
@@ -44,12 +42,11 @@ describe(LineChartComponent, () => {
 
 /*  CHECKS FOR NUMBER OF DATA POITNS ON THE LINE. NOT WORKING JUST NOW THOUGH "CIRCLES" IS NOT RECOGNISED.
     
-    it('Should render correct number of data points on each line', async () => {
-        await waitFor(() => {
+    it('Should render correct number of data points on each line', () => {
+
             const lines = document.querySelectorAll('.recharts-line');
             lines.forEach((line, index) => {
                 const dataPoints = line.querySelectorAll('circle');
                 expect(dataPoints.length).toBe(testData.length);
-            });
         });
     }); */
