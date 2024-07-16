@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import FetchData from '../components/FetchComparisonData';
 import ResultsList from '../components/ResultsList';
 import TeamDetails from '../components/TeamDetails';
+import MappedResults from '../components/MapResults';
 
 import BarChartComponent from '../components/BarChart';
 import LineChartComponent from '../components/LineChart';
@@ -38,11 +39,12 @@ const ResultsPage = () => {
     FetchApiData();
   }, [inputValue, inputValue2]);
   
-//Calls map component to 
+//Calls map component to map results into json format gameweek and similarity
   useEffect(() => {
-    const mappedResults = result.map((value, index) => ({ gameweek: index + 1, similarity: value }));
+    const mappedResults = MappedResults(result)
     setMappedResults(mappedResults);
 
+//check if filter is on 
     if (filterState) {
       const filteredResults = mappedResults.filter(object => object.similarity >= 40);
       setFilteredResult(filteredResults);
@@ -89,17 +91,7 @@ const ResultsPage = () => {
               </span>
             </h2>
           </Col>
-          <Row className ="result-container">
-            <Col>
-            </Col>
-            <Col>
-                  <PieChartComponent similarityPrcentage={overallSimilarity}/>
-            </Col>
-            <Col>
-            </Col>
-          </Row>
         </Row>
-
         <Row>
           <Col className="mt-5 mb-5">
             <LineChartComponent data={mappedResults}/>
