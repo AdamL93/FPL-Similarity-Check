@@ -1,4 +1,4 @@
-// Results page
+// Page to display comparison results 
 import React from 'react';
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -8,13 +8,12 @@ import ResultsList from '../components/ResultsList';
 import TeamDetails from '../components/TeamDetails';
 import MappedResults from '../components/MapResults';
 import GetSimilarityColour from '../components/GetSimilarityColour';
-
 import BarChartComponent from '../components/BarChart';
 import LineChartComponent from '../components/LineChart';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
 
 
 const ResultsPage = () => {
@@ -53,9 +52,10 @@ const ResultsPage = () => {
     }
   }, [result, filterState]);
 
-  
+  //checks similarity result and checks colour.
   const similarityColour = GetSimilarityColour(overallSimilarity);
 
+  //checks if filter is on and sets state.
   const toggleFilter = () => {
   setFilterState(prevState => !prevState);
 };
