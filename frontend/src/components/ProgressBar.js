@@ -1,18 +1,18 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 
-function AddProgressBar(progressNumber) {
-    let chartColour = "warning";
+function AddProgressBar({ progressNumber }) {
+    let barColour = "warning";
 
     if (progressNumber >= 60) {
-        chartColour = "danger"
+        barColour = "danger"
     } else if (progressNumber < 40) {
-        chartColour = "success"
+        barColour = "success"
    
     }
 
     return <ProgressBar 
-        variant={chartColour}
+        variant={barColour}
         animated now={progressNumber} 
         label={`${progressNumber}%`} 
         style={{ width: '90%'  }}

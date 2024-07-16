@@ -26,10 +26,10 @@ describe(LineChartComponent, () => {
         // Checks number of lines that have been rendered on the chart.
         render(<LineChartComponent data={testData}/>);
     
+        // is waitfor necessary?
         await waitFor(() => {
             const lines = document.querySelectorAll('.recharts-line');
             expect(lines.length).toBeGreaterThan(0);
-            //expect(lines.length).toBe(testData.length); 
         });
     });
 
