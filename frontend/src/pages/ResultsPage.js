@@ -102,7 +102,7 @@ const ResultsPage = () => {
         </ul>
       </Col>
       <Col>
-        <Row className="result-container">
+        <Row className="overall-container">
           <Col>
             <h2>
               <span style={{ color: overallSimilarityColour}}>
