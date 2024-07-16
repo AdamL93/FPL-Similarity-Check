@@ -32,5 +32,11 @@ describe(AddProgressBar, () => {
 
     })
 
+    it("Should render the number correctly", () => {
+        render(<AddProgressBar progressNumber={50}/>)
+        const labelNumber = screen.getByText("50%")
+        expect(labelNumber).toBeInTheDocument();
+    })
+
 
 })
