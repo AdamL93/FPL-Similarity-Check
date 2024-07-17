@@ -31,8 +31,6 @@ describe(LineChartComponent, () => {
        
     });
 
-
-
     it('Should render a tooltip', () => {
         const tooltip = document.querySelector('.recharts-tooltip-wrapper');
         expect(tooltip).toBeInTheDocument();
