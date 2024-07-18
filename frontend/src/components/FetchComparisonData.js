@@ -1,7 +1,10 @@
 
-const FetchData = async (inputValue, inputValue2) => {
+const FetchData = async (inputValue, inputValue2 = null) => {
+
+    let fetchRoute = (inputValue2 === null) ? (`${inputValue}`) : (`${inputValue}/${inputValue2}`);
+
     try {
-    const response = await fetch(`/api/fplDatabase/${inputValue}/${inputValue2}`);
+    const response = await fetch(`/api/fplDatabase/${fetchRoute}`);
     const responseResult = await response.json();
 
     if (response.ok) {
