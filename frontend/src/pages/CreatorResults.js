@@ -31,17 +31,25 @@ const CreatorResults = () => {
 
       <Row>
         {fetchedResults.map((result, index) => { 
+
           const teamIdKey = Object.keys(result);
           const arrayLength = result[teamIdKey].length;
+          
           const overallSimilarity = result[teamIdKey][arrayLength - 1]; 
+          const reducedArray = result[teamIdKey].slice(0,-1)
+          const highestGameweekSimilarity = Math.max(...reducedArray)
           const similarityColour = GetSimilarityColour(overallSimilarity)
+          const highestGwSimilarityColour = GetSimilarityColour(highestGameweekSimilarity)
 
           return (
             <Col key={index} xs={12} md={6} lg={3}>
               <CreatorResultsComponent
-                title={`Team Id:  ${teamIdKey}`}
-                description={`Average Similarity: ${overallSimilarity}%`}
-                textColour={similarityColour}
+                teamId={`Team Id:  ${teamIdKey}`}
+                similarity={`Average Similarity: ${overallSimilarity}%`}
+                highestGameweekSimilarity = {`Highest GW Similarity:  ${highestGameweekSimilarity}%`}
+                avgTextColour={similarityColour}
+                gwTextColour={highestGwSimilarityColour}
+                
               />
             </Col>
           );
