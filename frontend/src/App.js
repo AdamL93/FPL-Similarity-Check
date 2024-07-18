@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import NavbarHeader from './components/Navbar'
 import ResultsPage from './pages/ResultsPage'
+import CreatorResults from './pages/CreatorResults'
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
       <div className="pages">
         <Routes>
           <Route exact path="/" element ={<Home searchResults={searchResults} setSearchResults={setSearchResults}/>} />
-          <Route path="/ResultsPage" element={<ResultsPage searchResults={searchResults} setSearchResults={setSearchResults}/>}/> 
+          <Route path="/ResultsPage" element={<ResultsPage searchResults={searchResults} setSearchResults={setSearchResults}/>}/>
+          <Route path="/CreatorResults" element={<CreatorResults searchResults={searchResults} setSearchResults={setSearchResults}/>}/> 
         </Routes>
       </div>
       </BrowserRouter>
