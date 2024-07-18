@@ -5,7 +5,9 @@ const getGameweekData = async (request, response) => {
     const gameweekData1 = {};
     const gameweekData2 = {};
 
+
     const { teamId, teamId2 } = request.params //gets teamid from route properties
+    
     try {
         const data = await fs.readFile('../Api_files/json_data/personal_league_gameweek_data.json', { encoding: 'utf8' });
         const jsonData = JSON.parse(data);

@@ -12,6 +12,8 @@ const Home = () => {
         console.log(teamId, teamId2)
 
         let navigateRoute = (teamId2 === '') ? ('/CreatorResults') : ('/ResultsPage');
+
+        //add if else to only send a single teamId if temaId2 is ''
         navigate(navigateRoute, { state: { inputValue: teamId, inputValue2: teamId2 } });
     };
     

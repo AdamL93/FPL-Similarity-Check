@@ -29,7 +29,7 @@ const ResultsPage = () => {
 
 // Calls Fetch data component to compare two teams on page render.
   useEffect(() => {
-    const FetchApiData= async () => {
+    const FetchApiData = async () => {
       const { result: fetchedResult, overallSimilarity: fetchedOverallSimilarity } = await FetchData(inputValue, inputValue2);
       setResult(fetchedResult);
       setOverallSimilarity(fetchedOverallSimilarity);
