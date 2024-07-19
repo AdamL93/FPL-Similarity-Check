@@ -34,11 +34,10 @@ const ResultsPage = () => {
       setResult(fetchedResult);
       setOverallSimilarity(fetchedOverallSimilarity);
     };
-
     FetchApiData();
   }, [inputValue, inputValue2]);
   
-//Calls map component to map results into json format gameweek and similarity
+//maps results into json format gameweek and similarity
   useEffect(() => {
     const mappedResults = MappedResults(result)
     setMappedResults(mappedResults);
