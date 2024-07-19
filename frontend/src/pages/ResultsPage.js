@@ -87,8 +87,7 @@ const handleClick = async (e) => {
     console.log(json.error)
   }
   if(response.ok) {
-    setResponse('Results Saved Successfully! Copy Object number')
-    console.log(json)
+    setResponse(`Save search number: ${json.data._id}`);
   }
 
 }
