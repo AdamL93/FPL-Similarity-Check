@@ -18,8 +18,10 @@ import Col from 'react-bootstrap/Col';
 
 const ResultsPage = () => {
 
+  //destructures input values.
   const location = useLocation();
   const { inputValue, inputValue2 } = location.state;
+
   const [result, setResult] = useState([]);
   const [overallSimilarity, setOverallSimilarity] = useState();
   const [mappedResults, setMappedResults] = useState([]);

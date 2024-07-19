@@ -2,7 +2,6 @@
 import SearchBar from '../components/SearchBar'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
@@ -17,9 +16,10 @@ const Home = () => {
     const handleSearchSubmit = (teamId, teamId2) => {
         console.log(teamId, teamId2)
 
+        //sets navigateRoute to correct route depending on inputs
         let navigateRoute = (teamId2 === '') ? ('/CreatorResults') : ('/ResultsPage');
 
-        //add if else to only send a single teamId if temaId2 is ''
+        //add if else to only send a single teamId if temaId2 is '' ?
         navigate(navigateRoute, { state: { inputValue: teamId, inputValue2: teamId2 } });
     };
 

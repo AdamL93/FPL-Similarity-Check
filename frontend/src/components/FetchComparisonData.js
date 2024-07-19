@@ -1,5 +1,6 @@
 
 const FetchData = async (inputValue, inputValue2 = null) => {
+    
     let fetchRoute = (inputValue2 === null) ? `${inputValue}` : `${inputValue}/${inputValue2}`;
     let hasTwoInputs = (inputValue2 !== null);
 

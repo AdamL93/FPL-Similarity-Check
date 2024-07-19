@@ -36,7 +36,6 @@ const getGameweekData = async (request, response) => {
         });
 
         console.log(gameweekData1.length)
-        //comparison logic here
         
         //gets number of matches per gameweek.
         const similarityArray = []

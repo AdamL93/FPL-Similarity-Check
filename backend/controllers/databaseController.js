@@ -6,9 +6,17 @@ const mongoose = require('mongoose')
 const saveResults = async (request, response) => {
     const {teamIds, resultsArray, overallSimilarity} = request.body
 
+    console.log('Request body', request.body)
+
     //saves results to database
     try {
-        const result = await Result.create({teamIds, resultsArray, overallSimilarity})
+        
+        const result = await Result.create({
+            teamIds,          
+            resultsArray,       
+            overallSimilarity    
+          });
+        console.log("successfully added to the database")
         response.status(200).json({
             message: "Result added to database",
             data: result
@@ -30,7 +38,7 @@ const getResult = async (request,response) => {
     console.log("id being queried", {id})
     const result = await Result.findById(id)
 
-    if (!result) {
+    if (!results) {
         return response.status(404).json({error: 'Result can not be found: invalid Id'})
     }
     response.status(200).json(result)
@@ -51,14 +59,14 @@ const deleteResult = async (request,response) => {
 
     const result = await Result.findOneAndDelete({_id: id})
 
-    if (!result) {
+    if (!results) {
         return response.status(404).json({error: 'Result can not be found: invalid Id'})
     }
     response.status(200).json(result)
 }
 
 
-
+//checks if Id is valid
 const isValidId = (id) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)){
