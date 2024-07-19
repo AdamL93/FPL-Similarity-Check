@@ -9,8 +9,22 @@ button {
   cursor: pointer;
 }
 
-
 button:active {
   background: var(--primary-darker); 
   transform: scale(0.98);
+}
+
+div.response {
+  padding: 15px;
+  background: #ddc9f0;
+  border: 1px black;
+  color: black;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
 }

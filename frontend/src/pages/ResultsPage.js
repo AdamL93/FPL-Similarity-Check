@@ -87,7 +87,7 @@ const handleClick = async (e) => {
     console.log(json.error)
   }
   if(response.ok) {
-    setResponse('Results Saved Successfully')
+    setResponse('Results Saved Successfully! Copy Object number')
     console.log(json)
   }
 
@@ -103,15 +103,17 @@ const handleClick = async (e) => {
           <TeamDetails inputValue={inputValue} inputValue2={inputValue2} />
         </Col>
         <Col className="text-end">
-          <button
-            className="button" 
-            onClick={handleClick}
-          >
-            Save Results
-          </button>
-        </Col>
+        <div className="button-wrapper">
+            {response && <div className="response">{response}</div>}
+            <button
+                className="button" 
+                onClick={handleClick}
+            >
+                Save Results
+            </button>
+        </div>
+    </Col>
     </Row>
-        
     <Row className="gx-5">
       <ResultsList
             filteredResult={filteredResult}
