@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
 :root {
   --primary: #9228f5;
   --error: #e7195a;
@@ -16,50 +15,4 @@ body {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
-}
-
-/* Search form */
-label, input {
-  display: block;
-}
-input {
-  padding: 10px;
-  margin-bottom: 20px;
-  width: 80%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-form button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/*style for home page */
-.home {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-  gap: 0px;
-  padding-top: 250px;
-  padding-left: 300px;
-}
-
-.search-container {
-  background:#00FF87;
-  width: 500px;
-  height: 300px;
-  border-radius: 30px;
-  margin: auto;
-  padding-left: 30px;
-  padding-right: 0px;
-  padding-top: 10px;
-  padding-bottom: 50px;
-  position:relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }

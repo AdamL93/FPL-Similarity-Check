@@ -1,0 +1,30 @@
+
+/*Styling for Search Bar*/
+
+.search-container {
+    background:#00FF87;
+    width: 500px;
+    height: 300px;
+    border-radius: 30px;
+    margin: auto;
+    padding-left: 30px;
+    padding-right: 0px;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    position:relative;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  /* Search form */
+  label, input {
+    display: block;
+  }
+  input {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  

@@ -1,0 +1,11 @@
+
+
+/*style for home page */
+.home {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 0px;
+    padding-top: 250px;
+    padding-left: 300px;
+  }

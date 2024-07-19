@@ -25,7 +25,6 @@ const SearchBar = ({handleSearchSubmit}) => {
                     onChange={({target}) => {
                     console.log(target.value)
                     setInputValue(target.value)}
-                    
                 }
                 />
                 <input 

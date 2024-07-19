@@ -1,10 +1,10 @@
 
-.button {
-    background-color: #9228f5;
-    border-color: black;
-    border-radius: 5px;
-    border-width: 1px;
-    color: #fff;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-    padding: 8px;
-  }
+button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+}

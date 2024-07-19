@@ -5,6 +5,8 @@ import './styles/index.css';
 import './styles/navbar.css';
 import './styles/results.css';
 import './styles/button.css';
+import './styles/home.css';
+import './styles/searchbar.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
