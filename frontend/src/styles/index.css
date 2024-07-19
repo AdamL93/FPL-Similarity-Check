@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
 /* layout */
 :root {
   --primary: #9228f5;
   --error: #e7195a;
 }
+
 body {
   background: #f1f1f1;
   margin: 0;
@@ -61,12 +63,3 @@ form button {
   position:relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
-
-.search-container h3 {
-  color: #37003C;
-}
-
-.search-container label {
-  color: #37003C;
-}
-

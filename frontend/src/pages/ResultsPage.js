@@ -65,7 +65,15 @@ const ResultsPage = () => {
     <Row className="banner gx-5">
       <Col>Results</Col>
     </Row>
-      <TeamDetails inputValue={inputValue} inputValue2={inputValue2} />
+    <Row className="gx-5 align-items-center">
+        <Col>
+          <TeamDetails inputValue={inputValue} inputValue2={inputValue2} />
+        </Col>
+        <Col className="text-end">
+          <button className="button">Save Results</button>
+        </Col>
+    </Row>
+        
     <Row className="gx-5">
       <ResultsList
             filteredResult={filteredResult}
