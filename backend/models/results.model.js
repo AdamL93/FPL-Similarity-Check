@@ -8,12 +8,12 @@ const resultsSchema = new Schema({
         required: true,
         unique: false
     },
-    resultsArrray: {
+    resultsArray: {
         type: [Number],
         required: true,
         unique: false
     },
-    overallSimillalrity: {
+    overallSimilarity: {
         type: Number,
         required: true,
         unique: false
@@ -22,6 +22,6 @@ const resultsSchema = new Schema({
     timestamps: true
 });
 
-const Results = mongoose.model('Results', resultsSchema)
+const Results = mongoose.model('Result', resultsSchema)
 
 module.exports = Results;

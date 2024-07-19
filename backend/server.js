@@ -18,7 +18,7 @@ app.use((request, response, next) => {
     next()
 })
 
-// Uses routes in route teams file (attaches them to the app)
+// Uses routes in fplDatabase route file (attaches them to the app)
 app.use('/api/fplDatabase', fplRoutes)
 
 
