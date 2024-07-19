@@ -25,8 +25,8 @@ const NavbarHeader = () => {
                   <NavDropdown.Item href="/">Account details</NavDropdown.Item>
                   <NavDropdown.Item href="/">Sign out</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/CreatorResults">
-                    Creator Results
+                  <NavDropdown.Item href="/RetreiveResult">
+                    Retreive Results
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>

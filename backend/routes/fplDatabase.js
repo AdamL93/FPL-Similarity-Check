@@ -7,7 +7,6 @@ const router = express.Router();
 //route handler
 router.get('/', () => {})
 
-
 //Post/Save a Result to database
 router.post('/SaveResults', saveResults)
 
