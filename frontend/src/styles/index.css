@@ -2,6 +2,8 @@
 
 :root {
   --primary: #9228f5;
+  --primary-dark: #5f17a1;
+  --primary-darker: #421070;
   --error: #e7195a;
 }
 

@@ -21,12 +21,14 @@ const ResultsPage = () => {
   //destructures input values.
   const location = useLocation();
   const { inputValue, inputValue2 } = location.state;
+  const inputArray = [inputValue, inputValue2]; 
 
   const [result, setResult] = useState([]);
   const [overallSimilarity, setOverallSimilarity] = useState();
   const [mappedResults, setMappedResults] = useState([]);
   const [filterState, setFilterState] = useState(false);
   const [filteredResult, setFilteredResult] = useState([]);
+  const [response, setResponse] = useState('');
 
 
 // Calls Fetch data component to compare two teams on page render.
@@ -61,6 +63,36 @@ const ResultsPage = () => {
   setFilterState(prevState => !prevState);
 };
 
+//handle save resultls button click
+const handleClick = async (e) => {
+  e.preventDefault()
+
+  const savedResults = {
+    teamIds: inputArray,            
+    resultsArray: result,           
+    overallSimilarity: overallSimilarity
+  };
+
+  const response = await fetch('/api/fplDatabase/SaveResults', {
+      method: 'POST',
+      body: JSON.stringify(savedResults),
+      headers: {
+          'Content-Type':'application/json'
+      }
+  })
+  const json = await response.json()
+
+  if (!response.ok) {
+    setResponse('Save Failed')
+    console.log(json.error)
+  }
+  if(response.ok) {
+    setResponse('Results Saved Successfully')
+    console.log(json)
+  }
+
+}
+
   return (
   <Container fluid="xs">
     <Row className="banner gx-5">
@@ -71,7 +103,12 @@ const ResultsPage = () => {
           <TeamDetails inputValue={inputValue} inputValue2={inputValue2} />
         </Col>
         <Col className="text-end">
-          <button className="button">Save Results</button>
+          <button
+            className="button" 
+            onClick={handleClick}
+          >
+            Save Results
+          </button>
         </Col>
     </Row>
         

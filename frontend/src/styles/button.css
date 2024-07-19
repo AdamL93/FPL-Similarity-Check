@@ -8,3 +8,9 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+
+
+button:active {
+  background: var(--primary-darker); 
+  transform: scale(0.98);
+}

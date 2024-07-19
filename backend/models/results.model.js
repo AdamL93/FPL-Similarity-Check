@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const resultsSchema = new Schema({
 
     teamIds:{
-        type: [Number],
+        type: [String],
         required: true,
         unique: false
     },
