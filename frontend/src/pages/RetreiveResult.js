@@ -11,7 +11,7 @@ import { useState } from "react"
 const RetreiveResult = () => {
 
     const [inputValue, setInputValue] = useState("")
-    const [retreivedResult, setRetreivedResult] = useState("");
+    const [retreivedResult, setRetreivedResult] = useState([]);
 
 
     //handle retreive button submit
@@ -27,9 +27,10 @@ const RetreiveResult = () => {
         if (!response.ok) {
             console.log("Retreival Unsuccessful")
             console.log(json)
+            setRetreivedResult([])
         }
         if(response.ok) {
-            
+
             console.log("Retrieval Successful");
             console.log("This is the result array:", json.resultsArray);
             console.log("Type of json.resultsArray:", typeof json.resultsArray);
@@ -48,7 +49,7 @@ const RetreiveResult = () => {
             <form onSubmit={handleSubmit}>
                 <h3>Retreive Results</h3>
                 <input 
-                    type="string"
+                    type="text"
                     placeholder="Enter result object id"
                     value={inputValue}
                     onChange={({target}) => {
