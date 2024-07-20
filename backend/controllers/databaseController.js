@@ -30,6 +30,7 @@ const saveResults = async (request, response) => {
 //Retreive a saved Result from the database 
 const getResult = async (request,response) => {
     const {id} = request.params
+    console.log("getResult has been called")
 
     if (!isValidId(id)) {
         return response.status(404).json({error: 'Invalid ID'})
@@ -38,7 +39,7 @@ const getResult = async (request,response) => {
     console.log("id being queried", {id})
     const result = await Result.findById(id)
 
-    if (!results) {
+    if (!result) {
         return response.status(404).json({error: 'Result can not be found: invalid Id'})
     }
     response.status(200).json(result)
