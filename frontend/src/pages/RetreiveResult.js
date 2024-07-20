@@ -24,8 +24,10 @@ const RetreiveResult = () => {
     //handle retreive button submit
     const handleSubmit = async (e) => {
         e.preventDefault()
-    
-        const response = await fetch(`/api/fplDatabase/SavedResults/${inputValue}`)
+
+        if (inputValue != "") {
+
+            const response = await fetch(`/api/fplDatabase/SavedResults/${inputValue}`)
 
         console.log(response)
 
@@ -36,10 +38,11 @@ const RetreiveResult = () => {
             console.log(json)
             setRetreivedResult([])
             setOverallSimilarity(null)
-            setTeamIds([])
+            setTeamIds([" null"," null"])
             setTimestamp(null)
             setIsSubmitted(true)
         }
+
         if(response.ok) {
 
             console.log("Retrieval Successful");
@@ -55,6 +58,11 @@ const RetreiveResult = () => {
             setTimestamp(json.createdAt)
             setIsSubmitted(true)
         }
+
+
+        }
+    
+        
     }
  
     return (
@@ -72,7 +80,7 @@ const RetreiveResult = () => {
                             className="mb-2"
                         />
                         <button type="submit">Retrieve</button>
-                    </form>  
+                    </form>
                 </Col>
             </Row>
 
