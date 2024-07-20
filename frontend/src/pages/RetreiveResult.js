@@ -2,9 +2,11 @@
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import ResultsList from '../components/ResultsList';
 import GetSimilarityColour from '../components/GetSimilarityColour';
 import MappedResults from '../components/MapResults';
+import TeamDetails from '../components/TeamDetails';
 import { useState } from "react"
 
 
@@ -12,7 +14,12 @@ const RetreiveResult = () => {
 
     const [inputValue, setInputValue] = useState("")
     const [retreivedResult, setRetreivedResult] = useState([]);
+    const [overallSimilarity, setOverallSimilarity] = useState();
+    const [teamIds, setTeamIds] = useState([]);
+    const [timestamp, setTimestamp] = useState();
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const similarityColour = GetSimilarityColour(overallSimilarity);
 
     //handle retreive button submit
     const handleSubmit = async (e) => {
@@ -28,6 +35,10 @@ const RetreiveResult = () => {
             console.log("Retreival Unsuccessful")
             console.log(json)
             setRetreivedResult([])
+            setOverallSimilarity(null)
+            setTeamIds([])
+            setTimestamp(null)
+            setIsSubmitted(true)
         }
         if(response.ok) {
 
@@ -39,36 +50,68 @@ const RetreiveResult = () => {
 
             const mappedResults = MappedResults(json.resultsArray)
             setRetreivedResult(mappedResults)
+            setOverallSimilarity(json.overallSimilarity)
+            setTeamIds(json.teamIds)
+            setTimestamp(json.createdAt)
+            setIsSubmitted(true)
         }
     }
  
     return (
 
-        <Container fluid="xs" className="d-flex justify-content-center align-items-center" style={{ minHeight: '15vh' }}>
-            <Row className="d-flex justify-content-center w-50">
-            <form onSubmit={handleSubmit}>
-                <h3>Retreive Results</h3>
-                <input 
-                    type="text"
-                    placeholder="Enter result object id"
-                    value={inputValue}
-                    onChange={({target}) => {
-                    console.log(target.value)
-                    setInputValue(target.value)}
-                }
-                />
-                <button type="submit" >Retreive</button>
-            </form>  
-            </Row> 
-
-            <Row>
-            <ResultsList
-            filteredResult={retreivedResult}
-            getSimilarityColour={GetSimilarityColour}
-          />
+        <Container fluid="xs" style={{ minHeight: '100vh' }}>
+            <Row className="d-flex justify-content-center align-items-center" style={{ minHeight: '15vh' }}>
+                <Col xs={12}>
+                    <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center">
+                        <h3>Retrieve Results</h3>
+                        <input 
+                            type="text"
+                            placeholder="Enter result object id"
+                            value={inputValue}
+                            onChange={({ target }) => setInputValue(target.value)}
+                            className="mb-2"
+                        />
+                        <button type="submit">Retrieve</button>
+                    </form>  
+                </Col>
             </Row>
 
+            {isSubmitted && (
+            <Row className="mt-3">
+                <Col xs={12} md={6}>
+                    <ResultsList
+                        filteredResult={retreivedResult}
+                        getSimilarityColour={GetSimilarityColour}
+                    />
+                </Col>
+                
+                <Col>
+                <Row className="overall-container">
+                    <h2>
+                        <span style={{ color: similarityColour}}>
+                            {`Overall Similarity: ${overallSimilarity}%`}
+                        </span>
+                    </h2>
+                </Row>
 
+                <Row className="overall-container">
+                        <TeamDetails inputValue={teamIds[0]} inputValue2={teamIds[1]} />
+                </Row>
+
+                <Row className="overall-container">
+                    <span style={{fontSize: "16px" }}>
+                        {`Date Saved: ${timestamp}`}
+                    </span>
+                        
+                </Row>
+ 
+                </Col>
+            </Row>
+            
+        )
+
+            }
+            
         </Container>
     );
 };
