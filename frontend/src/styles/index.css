@@ -18,3 +18,12 @@ body {
   padding: 20px;
   margin: 0 auto;
 }
+
+.error{
+  max-width: 270px;
+  margin: 0 auto;
+  padding: 16px;
+  background:#fff4f7;
+  border-radius: 2px;
+  position: relative;
+}
