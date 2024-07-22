@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/SearchBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/SearchBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
+import AddSwitch from './Filter';
+
+/**
+ * SearchBar is a React component that provides a form for submitting search queries.
+ * It includes a toggle switch to change the search type and remove the second input field.
+ * An error message will be displayed if the required fields are not filled in.
+ * 
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {Function} props.handleSearchSubmit - A function to handle the search submission. It is called with the input values when the form is submitted.
+ * @param {Function} props.toggleFilter - A function to toggle the search type between "Content Creator Search" and "Team Search". This function is called when the switch is toggled.
+ * @param {boolean} props.filterState - A boolean to check the current state of the filter. If `true`, the form will only include a single input field; otherwise, it will include two.
+ * 
+ * @example
+ * const handleSearchSubmit = (inputValue, inputValue2) => {
+ *   // Handle the search submission
+ * };
+ * 
+ * const toggleFilter = () => {
+ *   // Toggle the filter state
+ * };
+ * 
+ * return (
+ *   &lt;SearchBar 
+ *     handleSearchSubmit={handleSearchSubmit} 
+ *     toggleFilter={toggleFilter} 
+ *     filterState={false} 
+ *   />
+ * );
+ * 
+ * @returns {JSX.Element} The rendered SearchBar component which includes form inputs, a toggle switch, and optional error alerts.
+ */
+const SearchBar = ({ handleSearchSubmit, toggleFilter, filterState }) => {
+    
+    const [inputValue, setInputValue] = useState('');
+    const [inputValue2, setInputValue2] = useState('');
+    const [error, setError] = useState(null);
+    const [show, setShow] = useState(true);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        if (!filterState) { 
+            if (inputValue === "" || inputValue2 === "") {
+                setError("Please fill in all the fields");
+            } else {
+                handleSearchSubmit(inputValue, inputValue2);
+            }   
+        } else {
+            if (inputValue === "") {
+                setError("Please fill in a Team Id");
+            } else {
+                handleSearchSubmit(inputValue, inputValue2);
+            } 
+        }
+    }
+    
+    return (
+        &lt;Container className="search-container" fluid="xs">
+            &lt;div className="d-flex justify-content-end pe-3">
+                &lt;AddSwitch label="Search Type" onChange={toggleFilter} />
+            &lt;/div>
+
+            &lt;form onSubmit={handleFormSubmit}>
+                &lt;h3>{filterState ? "Content Creator Search" : "Team Search"}&lt;/h3>
+                &lt;input 
+                    type="number"
+                    placeholder="Enter team id"
+                    value={inputValue}
+                    onChange={({target}) => {
+                        console.log(target.value);
+                        setInputValue(target.value);
+                    }}
+                />
+                {!filterState &amp;&amp; (
+                    &lt;input 
+                        type="number"
+                        placeholder="Enter second team id"
+                        value={inputValue2}
+                        onChange={({ target }) => setInputValue2(target.value)}
+                    />
+                )}
+                &lt;button type="submit">Search&lt;/button>
+            &lt;/form>
+            {error &amp;&amp; 
+                &lt;Alert variant="danger" className="error" onClose={() => setShow(false)} dismissible>
+                    {error}
+                &lt;/Alert>
+            }
+        &lt;/Container>
+    );
+}
+
+export default SearchBar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddProgressBar">AddProgressBar</a></li><li><a href="global.html#AddSwitch">AddSwitch</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BarChartComponent">BarChartComponent</a></li><li><a href="global.html#CreatorResults">CreatorResults</a></li><li><a href="global.html#CreatorResultsComponent">CreatorResultsComponent</a></li><li><a href="global.html#FetchData">FetchData</a></li><li><a href="global.html#GetSimilarityColour">GetSimilarityColour</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#LineChartComponent">LineChartComponent</a></li><li><a href="global.html#MappedResults">MappedResults</a></li><li><a href="global.html#NavbarHeader">NavbarHeader</a></li><li><a href="global.html#ResultsList">ResultsList</a></li><li><a href="global.html#ResultsPage">ResultsPage</a></li><li><a href="global.html#RetreiveResult">RetreiveResult</a></li><li><a href="global.html#SearchBar">SearchBar</a></li><li><a href="global.html#TeamDetails">TeamDetails</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 22 2024 18:01:33 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

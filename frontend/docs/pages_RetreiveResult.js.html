@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/RetreiveResult.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/RetreiveResult.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ResultsList from '../components/ResultsList';
+import GetSimilarityColour from '../components/GetSimilarityColour';
+import MappedResults from '../components/MapResults';
+import TeamDetails from '../components/TeamDetails';
+import { useState } from "react";
+
+/**
+ * The `RetreiveResult` component allows users to retrieve saved search results from the database.
+ * 
+ * It provides a form for users to input an object ID which fetches the data from the server. 
+ * The data is retrieved and the results displayed. 
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered RetreiveResult component which includes a form to retrieve and display the results.
+ */
+const RetreiveResult = () => {
+
+    const [inputValue, setInputValue] = useState("");
+    const [retreivedResult, setRetreivedResult] = useState([]);
+    const [overallSimilarity, setOverallSimilarity] = useState();
+    const [teamIds, setTeamIds] = useState([]);
+    const [timestamp, setTimestamp] = useState();
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    /**
+     * Determines the colour for the overall similarity text based on its value.
+     * 
+     * @type {string}
+     */
+    const similarityColour = GetSimilarityColour(overallSimilarity);
+
+    /**
+     * Handles form submission to retrieve saved results based on the provided result object ID.
+     * Fetches data from the server and updates the component state with the retrieved results.
+     * 
+     * @async
+     * @function
+     * @param {React.FormEvent} e - The form submit event.
+     * @returns {Promise&lt;void>}
+     */
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (inputValue !== "") {
+            const response = await fetch(`/api/fplDatabase/SavedResults/${inputValue}`);
+            console.log(response);
+
+            const json = await response.json();
+
+            if (!response.ok) {
+                console.log("Retreival Unsuccessful");
+                console.log(json);
+                setRetreivedResult([]);
+                setOverallSimilarity(null);
+                setTeamIds([" null", " null"]);
+                setTimestamp(null);
+                setIsSubmitted(true);
+            } else {
+                console.log("Retrieval Successful");
+                console.log("This is the result array:", json.resultsArray);
+                console.log("Type of json.resultsArray:", typeof json.resultsArray);
+                console.log("Is json.resultsArray an array?", Array.isArray(json.resultsArray));
+                console.log("Contents of json.resultsArray:", json.resultsArray);
+
+                const mappedResults = MappedResults(json.resultsArray);
+                setRetreivedResult(mappedResults);
+                setOverallSimilarity(json.overallSimilarity);
+                setTeamIds(json.teamIds);
+                setTimestamp(json.createdAt);
+                setIsSubmitted(true);
+            }
+        }
+    }
+
+    return (
+        &lt;Container fluid="xs" style={{ minHeight: '100vh' }}>
+            &lt;Row className="d-flex justify-content-center align-items-center" style={{ minHeight: '15vh' }}>
+                &lt;Col xs={12}>
+                    &lt;form onSubmit={handleSubmit} className="d-flex flex-column align-items-center">
+                        &lt;h3>Retrieve Results&lt;/h3>
+                        &lt;input 
+                            type="text"
+                            placeholder="Enter result object id"
+                            value={inputValue}
+                            onChange={({ target }) => setInputValue(target.value)}
+                            className="mb-2"
+                        />
+                        &lt;button type="submit">Retrieve&lt;/button>
+                    &lt;/form>
+                &lt;/Col>
+            &lt;/Row>
+
+            {isSubmitted &amp;&amp; (
+                &lt;Row className="mt-3">
+                    &lt;Col xs={12} md={6}>
+                        &lt;ResultsList
+                            filteredResult={retreivedResult}
+                            getSimilarityColour={GetSimilarityColour}
+                        />
+                    &lt;/Col>
+                    
+                    &lt;Col>
+                        &lt;Row className="overall-container">
+                            &lt;h2>
+                                &lt;span style={{ color: similarityColour }}>
+                                    {`Overall Similarity: ${overallSimilarity}%`}
+                                &lt;/span>
+                            &lt;/h2>
+                        &lt;/Row>
+
+                        &lt;Row className="overall-container">
+                            &lt;TeamDetails inputValue={teamIds[0]} inputValue2={teamIds[1]} />
+                        &lt;/Row>
+
+                        &lt;Row className="overall-container">
+                            &lt;span style={{ fontSize: "16px" }}>
+                                {`Date Saved: ${timestamp}`}
+                            &lt;/span>
+                        &lt;/Row>
+                    &lt;/Col>
+                &lt;/Row>
+            )}
+        &lt;/Container>
+    );
+};
+
+export default RetreiveResult;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddProgressBar">AddProgressBar</a></li><li><a href="global.html#AddSwitch">AddSwitch</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BarChartComponent">BarChartComponent</a></li><li><a href="global.html#CreatorResults">CreatorResults</a></li><li><a href="global.html#CreatorResultsComponent">CreatorResultsComponent</a></li><li><a href="global.html#FetchData">FetchData</a></li><li><a href="global.html#GetSimilarityColour">GetSimilarityColour</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#LineChartComponent">LineChartComponent</a></li><li><a href="global.html#MappedResults">MappedResults</a></li><li><a href="global.html#NavbarHeader">NavbarHeader</a></li><li><a href="global.html#ResultsList">ResultsList</a></li><li><a href="global.html#ResultsPage">ResultsPage</a></li><li><a href="global.html#RetreiveResult">RetreiveResult</a></li><li><a href="global.html#SearchBar">SearchBar</a></li><li><a href="global.html#TeamDetails">TeamDetails</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 22 2024 18:01:33 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/ResultsList.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/ResultsList.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import AddSwitch from '../components/Filter';
+import AddProgressBar from '../components/ProgressBar';
+import Col from 'react-bootstrap/Col';
+
+/**
+ * ResultsList is a React component that displays a list of results with their gameweek and similarity percentage.
+ * Each result includes a progress bar indicating the similarity percentage as well as an optional switch to filter results.
+ * 
+ * @component
+ * @param {Object[]} props.filteredResult - An array of result objects to be displayed.
+ * @param {number} props.filteredResult[].gameweek - The gameweek number of the result.
+ * @param {number} props.filteredResult[].similarity - The similarity percentage result.
+ * @param {Function|null} [props.toggleFilter=null] - An optional function to display a switch to filter results.
+ * @param {Function} props.getSimilarityColour - A function to determine the colour of the text based on the similarity percentage.
+ * 
+ * @example
+ * const filteredResult = [
+ *   { gameweek: 1, similarity: 30 },
+ *   { gameweek: 2, similarity: 50 },
+ *   { gameweek: 3, similarity: 60 },
+ * ];
+ * 
+ * const getSimilarityColour = (similarity) => {
+ *   if (similarity >= 60) return 'red';
+ *   if (similarity &lt; 40) return 'green';
+ *   return 'orange';
+ * };
+ * 
+ * const toggleFilter = () => {
+ *   // insert function logic
+ * };
+ * 
+ * return (
+ *   &lt;ResultsList 
+ *     filteredResult={filteredResult} 
+ *     toggleFilter={toggleFilter} 
+ *     getSimilarityColour={getSimilarityColour} 
+ *   />
+ * );
+ * 
+ * @returns {JSX.Element} The rendered list of results with gameweek, similarity percentage, progress bars, and optional filter switch.
+ */
+const ResultsList = ({ filteredResult, toggleFilter = null, getSimilarityColour }) => {
+
+  console.log("this is the filtered ResultList");
+  console.log(filteredResult);
+
+  return (
+    &lt;Col className="result-container">
+      &lt;div className="d-flex justify-content-between align-items-center mb-3">
+        &lt;h2>Gameweek Similarity&lt;/h2>
+        {toggleFilter &amp;&amp; &lt;AddSwitch label="Filter > 40%" onChange={toggleFilter} />}
+      &lt;/div>
+
+      &lt;ul>
+        {filteredResult.length > 0 ? (
+          filteredResult.map((resultObject, index) => {
+            console.log("This is the result object");
+            console.log(resultObject);
+            const similarityColour = getSimilarityColour(resultObject.similarity);
+
+            return (
+              &lt;li key={index}>
+                &lt;span style={{ color: "purple" }}>{`GW ${resultObject.gameweek}: `}&lt;/span>
+                &lt;span style={{ color: similarityColour, fontSize: '24px' }}>{`${resultObject.similarity}%`}&lt;/span>
+                &lt;AddProgressBar progressNumber={resultObject.similarity} />
+              &lt;/li>
+            );
+          })
+        ) : (
+          &lt;li>No available data&lt;/li>
+        )}
+      &lt;/ul>
+    &lt;/Col>
+  );
+}
+
+export default ResultsList;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddProgressBar">AddProgressBar</a></li><li><a href="global.html#AddSwitch">AddSwitch</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BarChartComponent">BarChartComponent</a></li><li><a href="global.html#CreatorResults">CreatorResults</a></li><li><a href="global.html#CreatorResultsComponent">CreatorResultsComponent</a></li><li><a href="global.html#FetchData">FetchData</a></li><li><a href="global.html#GetSimilarityColour">GetSimilarityColour</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#LineChartComponent">LineChartComponent</a></li><li><a href="global.html#MappedResults">MappedResults</a></li><li><a href="global.html#NavbarHeader">NavbarHeader</a></li><li><a href="global.html#ResultsList">ResultsList</a></li><li><a href="global.html#ResultsPage">ResultsPage</a></li><li><a href="global.html#RetreiveResult">RetreiveResult</a></li><li><a href="global.html#SearchBar">SearchBar</a></li><li><a href="global.html#TeamDetails">TeamDetails</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 22 2024 18:01:33 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
