@@ -1,40 +1,55 @@
-require('dotenv').config()
-const mongoose = require('mongoose')
-const express = require('express')
+require('dotenv').config();
+const mongoose = require('mongoose');
+const express = require('express');
 
-
-// creates instance of an express app
+/**
+ * Creates an instance of an Express app.
+ * @type {Object}
+ */
 const app = express();
 
-//imports the routes defined in the routes teams folder.
-const fplRoutes = require('./routes/fplDatabase')
+// Imports the routes defined in the routes folder.
+const fplRoutes = require('./routes/fplDatabase');
 
-//middleware to parse incoming json requests
-app.use(express.json())
+/**
+ * Middleware to parse incoming JSON requests.
+ */
+app.use(express.json());
 
-//middle ware to log requests as they come in.
+/**
+ * Middleware to log requests as they come in.
+ * @param {Object} request - The request object.
+ * @param {Object} response - The response object.
+ * @param {Function} next - The next middleware function.
+ */
 app.use((request, response, next) => {
-    console.log(request.path, request.method)
-    next()
-})
+    console.log(request.path, request.method);
+    next();
+});
 
-// Uses routes in fplDatabase route file (attaches them to the app)
-app.use('/api/fplDatabase', fplRoutes)
+/**
+ * Uses routes in fplDatabase route file (attaches them to the app).
+ * @name /api/fplDatabase
+ * @function
+ * @memberof module:app
+ */
+app.use('/api/fplDatabase', fplRoutes);
 
-
-// connect to database
+/**
+ * Connects to the MongoDB database.
+ * Listens for requests on the specified port.
+ */
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-    
-        // listen for requests from port number
+        /**
+         * Starts the server to listen for requests.
+         * @param {number} port - The port number on which the server listens.
+         */
         app.listen(process.env.PORT, () => {
             console.log('Connected to MongoDB');
             console.log('Listening on port 4000');
-        })
+        });
     })
     .catch((error) => {
-        console.log(error)
-    })
-
-
-
+        console.log(error);
+    });
