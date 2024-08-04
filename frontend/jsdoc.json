@@ -1,9 +1,7 @@
 {
     "source": {
       "include": [
-        "src",
-        "src/components",
-        "src/pages"
+        "src/components"
       ],
       "exclude": ["node_modules"],
       "includePattern": ".+\\.js(doc|x)?$",
