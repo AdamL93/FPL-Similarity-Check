@@ -5,12 +5,14 @@ const { saveResults, getResult, deleteResult } = require('../controllers/databas
 const router = express.Router();
 
 /**
- * Base route
+ * Base route fucntionality
  * @name get/
  * @function
  * @memberof module:router
  */
-router.get('/', () => {});
+router.get('/', (request, response) => {
+    response.status(200).send('Successfull Api response');
+});
 
 /**
  * Route to save a result to the database.
