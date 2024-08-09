@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 /**
- * Home is a React functional component which represents the home page of the app.
+ * Home is a React component which represents the home page of the app.
  * 
  * It contains a `SearchBar` component where users can input search criteria. The component handles
  * state for filtering and navigation based on the user's input.
@@ -31,7 +31,7 @@ const Home = () => {
      * the CreatorResults page or the default ResultsPage.
      * 
      * @param {string} teamId - The first team ID input by the user.
-     * @param {string} [teamId2=''] - The second team ID input by the user (optional)
+     * @param {string} [teamId2=''] - The second team ID input by the user
      * @returns {void}
      * 
      * @example
