@@ -5,8 +5,8 @@ import Col from 'react-bootstrap/Col';
 /**
  * TeamDetails Component
  * 
- * This component displays two team IDs using Bootstrap's Row and Col fucntionality.
- * The two ID's are separated by providing the first Team ID with Margin to the right.
+ * This component displays two team Ids using Bootstrap's Row and Col fucntionality.
+ * The two Ids are separated by providing the first Team Id with Margin to the right.
  * 
  * @component
  * @example

@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 /**
  * CreatorResultsComponent displays a card with the searched content creator team ID, 
  * similarity percentage, and the highest gameweek similarity. 
- * The Average gameweek and highest gameweek similarity colours can be customised through props. 
+ * The Average gameweek and Highest gameweek similarity colours can be customised through props. 
  * 
  * @component
  * @param {Object} props - The properties object.
