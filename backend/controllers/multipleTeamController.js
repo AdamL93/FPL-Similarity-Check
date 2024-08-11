@@ -40,6 +40,7 @@ const getCreatorGameweekData = async (request, response) => {
         const creatorJsonData = JSON.parse(creatorData);
         const jsonData = JSON.parse(inputData);
 
+        // Cycles through content creators and gets the pick data
         for (let i = 0; i < contentCreatorIds.length; i++) {
             let contentCreatorId = contentCreatorIds[i];
             const gameweekData1 = {};
@@ -82,7 +83,6 @@ const getCreatorGameweekData = async (request, response) => {
             combinedArrays.push(teamResultsObject);
         }
 
-        console.log(combinedArrays);
         return response.status(200).send(combinedArrays);
     } catch (err) {
         return response.status(404).json({ error: 'Unable to retrieve data' });

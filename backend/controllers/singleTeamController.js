@@ -27,12 +27,7 @@ const getGameweekData = async (request, response) => {
         const team1Data = jsonData.filter(item => item.team_id === Number(teamId));
         const team2Data = jsonData.filter(item => item.team_id === Number(teamId2));
 
-        console.log(typeof team1Data);
-        console.log(typeof team2Data);
-        console.log(`Successfully read data for ${teamId} and ${teamId2}`);
-
-        console.log("Data received");
-
+      
         // Gets pick data from both teams
         team1Data.forEach(entry => {
             const gameWeek = entry.game_week;
@@ -45,8 +40,6 @@ const getGameweekData = async (request, response) => {
             const picks = entry.data.picks.map(pick => pick.element);
             gameweekData2[gameWeek] = picks;
         });
-
-        console.log(Object.keys(gameweekData1).length);
 
         // Gets number of matches per gameweek
         const similarityArray = [];
@@ -62,14 +55,11 @@ const getGameweekData = async (request, response) => {
             let similarityPercentage = (elementMatches.length / 15) * 100;
             let roundedSimilarityPercentage = Math.round(similarityPercentage);
             cumulativeSimilarity += roundedSimilarityPercentage;
-            console.log(`Gameweek ${key} similarity: ${roundedSimilarityPercentage} %`);
             similarityArray.push(roundedSimilarityPercentage);
         }
 
         let overallSimilarity = Math.round(cumulativeSimilarity / Object.keys(gameweekData1).length);
         similarityArray.push(overallSimilarity);
-
-        console.log("Similarity Array:", similarityArray);
 
         return response.status(200).send(similarityArray);
     } catch (err) {
