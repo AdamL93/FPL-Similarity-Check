@@ -20,14 +20,28 @@ const getGameweekData = async (request, response) => {
     // Gets team IDs from route properties
     const { teamId, teamId2 } = request.params; 
 
+    // Loops through each gameweek api call until not found
+    for (let gw = 1; gw <= 38; gw++) {
+
+    // Define Api endpoints url's
+     const teamIdUrl = `https://fantasy.premierleague.com/api/entry/${teamId}/event/${gw}/picks/`
+     const teamId2Url = `https://fantasy.premierleague.com/api/entry/${teamId2}/event/${gw}/picks/`
+
+    }
     try {
-        const data = await fs.readFile('../Api_files/json_data/personal_league_gameweek_data.json', { encoding: 'utf8' });
-        const jsonData = JSON.parse(data);
+
+        // Fetch URL data and format into Json
+        const response = await fetch(teamIdUrl);
+        const jsonData = await response.json();
+
+        // Add the gw and pick data to a list/dict
+
+
 
         const team1Data = jsonData.filter(item => item.team_id === Number(teamId));
         const team2Data = jsonData.filter(item => item.team_id === Number(teamId2));
 
-      
+        
         // Gets pick data from both teams
         team1Data.forEach(entry => {
             const gameWeek = entry.game_week;
