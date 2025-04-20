@@ -6,17 +6,65 @@ require('dotenv').config();
  * @type {number[]}
  */
 const contentCreatorIds = [
-    7632, 14076, 4237, 6312, 275269,
-    3322, 4845, 908, 602, 16256,
-    1596, 11349, 12, 4746, 256075,
-    6770, 23891, 8366, 4305040, 18675,
-    12315, 2514, 329799, 7726, 9906,
-    8258, 36965, 51396, 393272,
-    4650, 387, 358, 4393, 5986, 946,
-    1974, 14165, 17482, 1072, 3717,
-    1672, 2134, 12090, 2361, 4664,
-    8302, 7665, 5090
-];
+    7632, 14076];
+
+/**
+ * Retrieves the current gameweek.
+ *
+ * @async
+ * @function getCurrentGameweek
+ * @returns {Promise<number>} - The current gameweek ID.
+ */
+async function getCurrentGameweek() {
+    const response = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/');
+    const data = await response.json();
+    const currentGW = data.events.find(event => event.is_current);
+    return currentGW.id;
+}
+
+
+/**
+ * Retrieves gameweek pick data for a team up to the current gameweek.
+ *
+ * @async
+ * @function retrievePickData
+ * @param {number} currentGameWeek - The current gameweek number to fetch data for.
+ * @param {string} teamId - The team ID to fetch pick data for.
+ * @returns {Promise<Object>} - Resolves to an object with gameweek numbers as keys and player IDs as values.
+ * @throws {Error} - Throws an error if the API request fails for any gameweek.
+ */
+
+const retrievePickData = async (teamId, currentGameWeek) => {
+
+    const gameWeekData = {}; 
+
+    // Retreives and stores gameweek picks data for the inputted team Id
+    for (let gw = 1; gw <= currentGameWeek; gw++){
+
+        // Team id data
+        const teamIdUrl = `https://fantasy.premierleague.com/api/entry/${teamId}/event/${gw}/picks/`;
+
+        try {
+            const response = await fetch(teamIdUrl);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data for ${teamId}, ${gw}`);
+            }
+
+            const jsonData = await response.json();
+
+            // extract pick data 
+            const picks = jsonData.picks.map(pick => pick.element);
+    
+            // Add gameweek and current gameweek picks data to dict
+            gameWeekData[gw] = picks;
+
+        } catch (err) {
+            console.log(`Error fetching gameweek ${gw} data`);
+        }
+    }
+    return gameWeekData;  
+}
+
 
 /**
  * Retrieves gameweek data for a specified team and compares it with content creators' gameweek data.
@@ -32,42 +80,29 @@ const contentCreatorIds = [
 const getCreatorGameweekData = async (request, response) => {
     const { teamId } = request.params;
     let combinedArrays = [];
+    const currentGameWeek = await getCurrentGameweek()
+
+    // Populates pick data for inputted team Id
+    let inputGameWeekData = await retrievePickData(teamId,currentGameWeek)
 
     try {
-        const inputData = await fs.readFile('../Api_files/json_data/personal_league_gameweek_data.json', { encoding: 'utf8' });
-        const creatorData = await fs.readFile('../Api_files/json_data/Content_Creator_gameweek_data.json', { encoding: 'utf8' });
-
-        const creatorJsonData = JSON.parse(creatorData);
-        const jsonData = JSON.parse(inputData);
 
         // Cycles through content creators and gets the pick data
         for (let i = 0; i < contentCreatorIds.length; i++) {
+
+            //retreives the current content creator id
             let contentCreatorId = contentCreatorIds[i];
-            const gameweekData1 = {};
-            const gameweekData2 = {};
 
-            const team1Data = jsonData.filter(item => item.team_id === Number(teamId));
-            const team2Data = creatorJsonData.filter(item => item.team_id === Number(contentCreatorId));
-
-            team1Data.forEach(entry => {
-                const gameWeek = entry.game_week;
-                const picks = entry.data.picks.map(pick => pick.element);
-                gameweekData1[gameWeek] = picks;
-            });
-
-            team2Data.forEach(entry => {
-                const gameWeek = entry.game_week;
-                const picks = entry.data.picks.map(pick => pick.element);
-                gameweekData2[gameWeek] = picks;
-            });
+            // initialises dict and populates the pick data for the current creator id (fresh dict every loop)
+            let contentCreatorData = await retrievePickData(contentCreatorId, currentGameWeek);
 
             // Calculates similarity percentages per gameweek.
             const similarityArray = [];
             let cumulativeSimilarity = 0;
 
-            for (const key in gameweekData1) {
-                let gameweek1Array = gameweekData1[key];
-                let gameweek2Array = gameweekData2[key];
+            for (const key in inputGameWeekData) {
+                let gameweek1Array = inputGameWeekData[key];
+                let gameweek2Array = contentCreatorData[key];
 
                 const elementMatches = gameweek1Array.filter(element => gameweek2Array.includes(element));
 
@@ -77,7 +112,7 @@ const getCreatorGameweekData = async (request, response) => {
                 similarityArray.push(roundedSimilarityPercentage);
             }
 
-            let overallSimilarity = Math.round(cumulativeSimilarity / Object.keys(gameweekData1).length);
+            let overallSimilarity = Math.round(cumulativeSimilarity / Object.keys(inputGameWeekData).length);
             similarityArray.push(overallSimilarity);
             const teamResultsObject = { [contentCreatorIds[i]]: similarityArray };
             combinedArrays.push(teamResultsObject);
