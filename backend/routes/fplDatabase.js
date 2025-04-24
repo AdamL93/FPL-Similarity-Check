@@ -2,6 +2,7 @@ const express = require('express');
 const { getGameweekData } = require('../controllers/singleTeamController');
 const { getCreatorGameweekData } = require('../controllers/multipleTeamController');
 const { saveResults, getResult, deleteResult } = require('../controllers/databaseController');
+const { getTeamName } = require('../services/fplService');
 const router = express.Router();
 
 /**
@@ -58,5 +59,14 @@ router.get('/:teamId/:teamId2', getGameweekData);
  * @param {Function} getCreatorGameweekData - Controller function to get gameweek comparison data for all content creators.
  */
 router.get('/:teamId', getCreatorGameweekData);
+
+/**
+ * Route to get team name of inputted team id.
+ * @name get/:teamName/:teamId
+ * @function
+ * @memberof module:router
+ * @param {Function} getTeamName - Service function to retreive team name of inputted teamid 
+ */
+router.get('/teamName/:teamId', getTeamName);
 
 module.exports = router;
