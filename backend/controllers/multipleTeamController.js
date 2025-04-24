@@ -36,34 +36,35 @@ async function getCurrentGameweek() {
 
 const retrievePickData = async (teamId, currentGameWeek) => {
 
+    const gameWeekUrls = []
     const gameWeekData = {}; 
 
     // Retreives and stores gameweek picks data for the inputted team Id
     for (let gw = 1; gw <= currentGameWeek; gw++){
 
-        // Team id data
-        const teamIdUrl = `https://fantasy.premierleague.com/api/entry/${teamId}/event/${gw}/picks/`;
+        // Creates array of all gameweek urls
+        gameWeekUrls.push(`https://fantasy.premierleague.com/api/entry/${teamId}/event/${gw}/picks/`);
 
-        try {
-            const response = await fetch(teamIdUrl);
-            if (!response.ok) {
-                throw new Error(`Failed to fetch data for ${teamId}, ${gw}`);
-            }
-
-            const jsonData = await response.json();
-
-            // extract pick data 
-            const picks = jsonData.picks.map(pick => pick.element);
-    
-            // Add gameweek and current gameweek picks data to dict
-            gameWeekData[gw] = picks;
-
-        } catch (err) {
-            console.log(`Error fetching gameweek ${gw} data`);
-        }
     }
-    return gameWeekData;  
+    try {
+        const responses = await Promise.all(gameWeekUrls.map(url => 
+            fetch(url).then(response => response.json())
+        ));
+
+        responses.forEach((response, index) => {
+            // extract pick data 
+            const picks = response.picks.map(pick => pick.element);
+
+            // Add current gameweek(index+1) and current gameweek picks data to dict
+            gameWeekData[index+1] = picks;           
+        })
+
+    } catch (err) {
+        console.log(`Error fetching gameweek data`);
+    }
+    return gameWeekData; 
 }
+ 
 
 
 /**
