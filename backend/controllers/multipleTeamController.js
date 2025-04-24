@@ -5,8 +5,17 @@ require('dotenv').config();
  * Array of content creator IDs.
  * @type {number[]}
  */
+
+// content creators from https://www.fplgameweek.com/#/24/team/4341/league/special_10002 up to #51 ranked.
 const contentCreatorIds = [
-    7632, 14076,4,5,3,7,8,6,10,13];
+    24, 746, 1301, 3544, 9, 271, 45957, 2869, 
+    1218866, 4267, 151847, 4805, 3544, 2627, 2911, 
+    2974, 1301, 4916, 8765, 1000810, 28015, 298110, 
+    3462276, 4581, 2748, 275466, 18339, 11502,
+    2087672, 4719275, 271, 13820, 151, 11539,
+    183425, 79661, 738, 17731, 266, 63256,
+    5289, 156, 3108, 32260, 50725, 2985, 1844,
+    20360, 45957, 2140];
 
 /**
  * Retrieves the current gameweek.
