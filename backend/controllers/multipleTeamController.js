@@ -6,7 +6,7 @@ require('dotenv').config();
  * @type {number[]}
  */
 const contentCreatorIds = [
-    7632, 14076];
+    7632, 14076,4,5,3,7,8,6,10,13];
 
 /**
  * Retrieves the current gameweek.
