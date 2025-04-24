@@ -15,6 +15,49 @@ async function getCurrentGameweek() {
     return currentGW.id;
 }
 
+
+/**
+ * Retrieves gameweek pick data for a team up to the current gameweek.
+ *
+ * @async
+ * @function retrievePickData
+ * @param {number} currentGameWeek - The current gameweek number to fetch data for.
+ * @param {string} teamId - The team ID to fetch pick data for.
+ * @returns {Promise<Object>} - Resolves to an object with gameweek numbers as keys and player IDs as values.
+ * @throws {Error} - Throws an error if the API request fails for any gameweek.
+ */
+
+const retrievePickData = async (teamId, currentGameWeek) => {
+
+    const gameWeekUrls = []
+    const gameWeekData = {}; 
+
+    // Retreives and stores gameweek picks data for the inputted team Id
+    for (let gw = 1; gw <= currentGameWeek; gw++){
+
+        // Creates array of all gameweek urls
+        gameWeekUrls.push(`https://fantasy.premierleague.com/api/entry/${teamId}/event/${gw}/picks/`);
+
+    }
+    try {
+        const responses = await Promise.all(gameWeekUrls.map(url => 
+            fetch(url).then(response => response.json())
+        ));
+
+        responses.forEach((response, index) => {
+            // extract pick data 
+            const picks = response.picks.map(pick => pick.element);
+
+            // Add current gameweek(index+1) and current gameweek picks data to dict
+            gameWeekData[index+1] = picks;           
+        })
+
+    } catch (err) {
+        console.log(`Error fetching gameweek data`);
+    }
+    return gameWeekData; 
+}
+
 /**
  * Retrieves gameweek data for two specified teams and calculates similarity percentages.
  *
@@ -28,8 +71,6 @@ async function getCurrentGameweek() {
  * @returns {Promise<void>} - Returns a promise that resolves with the similarity data.
  */
 const getGameweekData = async (request, response) => {
-    const gameweekData1 = {};
-    const gameweekData2 = {};
 
     // Gets team IDs from route properties
     const { teamId, teamId2 } = request.params; 
@@ -39,37 +80,18 @@ const getGameweekData = async (request, response) => {
 
     try {
         // Loops through each gameweek api call until not found
-        for (let gw = 1; gw <= currentGw; gw++) {
-
-            // Define Api endpoints url's
-            const teamIdUrl = `https://fantasy.premierleague.com/api/entry/${teamId}/event/${gw}/picks/`
-            const teamId2Url = `https://fantasy.premierleague.com/api/entry/${teamId2}/event/${gw}/picks/`
-
-            // Fetch URL data and format into Json
-            const response1 = await fetch(teamIdUrl);
-            const jsonData1 = await response1.json();
-
-            const response2 = await fetch(teamId2Url);
-            const jsonData2 = await response2.json();;
-
-            //extract the picks data
-            const picks1 = jsonData1.picks.map(pick => pick.element);
-            const picks2 = jsonData2.picks.map(pick => pick.element);
-
-            // Add the gw and pick data to a dict
-            gameweekData1[gw] = picks1;
-            gameweekData2[gw] = picks2;
-        }
+        const team1Data = await retrievePickData(teamId, currentGw);
+        const team2Data = await retrievePickData(teamId2, currentGw);
 
         // Gets number of matches per gameweek
         const similarityArray = [];
         let cumulativeSimilarity = 0;
 
-        for (const key in gameweekData1) {
-            let gameweek1Array = gameweekData1[key];
-            let gameweek2Array = gameweekData2[key];
+        for (const key in team1Data) {
+            let team1Array = team1Data[key];
+            let team2Array = team2Data[key];
 
-            const elementMatches = gameweek1Array.filter(element => gameweek2Array.includes(element));
+            const elementMatches = team1Array.filter(element => team2Array.includes(element));
 
             // Calculates similarity percentages per gameweek and stores in array
             let similarityPercentage = (elementMatches.length / 15) * 100;
@@ -78,7 +100,7 @@ const getGameweekData = async (request, response) => {
             similarityArray.push(roundedSimilarityPercentage);
         }
 
-        let overallSimilarity = Math.round(cumulativeSimilarity / Object.keys(gameweekData1).length);
+        let overallSimilarity = Math.round(cumulativeSimilarity / Object.keys(team1Data).length);
         similarityArray.push(overallSimilarity);
 
         //Send the similary data as a response after all gameweeks have been processed
