@@ -62,7 +62,7 @@ const retrievePickData = async (teamId, currentGameWeek) => {
 
         responses.forEach((response, index) => {
             // extract pick data 
-            const picks = response.picks.map(pick => pick.element);
+            let picks = response.picks.map(pick => pick.element);
 
             //removes assistant manager chip from comparison
             if ( picks.length === 16) {
@@ -74,7 +74,7 @@ const retrievePickData = async (teamId, currentGameWeek) => {
         })
 
     } catch (err) {
-        console.log(`Error fetching gameweek data`);
+        console.log(`Error fetching gameweek data retrievePickData`, err);
     }
     return gameWeekData; 
 }

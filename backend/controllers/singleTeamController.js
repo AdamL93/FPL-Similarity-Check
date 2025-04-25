@@ -46,10 +46,10 @@ const retrievePickData = async (teamId, currentGameWeek) => {
 
         responses.forEach((response, index) => {
             // extract pick data 
-            const picks = response.picks.map(pick => pick.element);
+            let picks = response.picks.map(pick => pick.element);
 
             //removes assistant manager chip from comparison
-            if ( picks.length === 16) {
+            if (picks.length === 16) {
                 picks = picks.slice(0, 15)
             };
   
@@ -59,7 +59,7 @@ const retrievePickData = async (teamId, currentGameWeek) => {
         })
 
     } catch (err) {
-        console.log(`Error fetching gameweek data`);
+        console.log(`Error fetching gameweek data RetrievePickData`, err);
     }
     return gameWeekData; 
 }
@@ -90,7 +90,7 @@ const getGameweekData = async (request, response) => {
         const team2Data = await retrievePickData(teamId2, currentGw);
 
         // Gets number of matches per gameweek
-        const similarityArray = [];
+        let similarityArray = [];
         let cumulativeSimilarity = 0;
 
         for (const key in team1Data) {
