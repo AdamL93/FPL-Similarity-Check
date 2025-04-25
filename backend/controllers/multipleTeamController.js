@@ -64,6 +64,11 @@ const retrievePickData = async (teamId, currentGameWeek) => {
             // extract pick data 
             const picks = response.picks.map(pick => pick.element);
 
+            //removes assistant manager chip from comparison
+            if ( picks.length === 16) {
+                picks = picks.slice(0, 15)
+            };
+
             // Add current gameweek(index+1) and current gameweek picks data to dict
             gameWeekData[index+1] = picks;           
         })
