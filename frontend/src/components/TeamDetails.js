@@ -19,11 +19,13 @@ import Col from 'react-bootstrap/Col';
  * @param {string|number} props.inputValue2 - The second team ID to display.
  * @returns {JSX.Element} The rendered component.
  */
-const TeamDetails = ({ inputValue, inputValue2 }) => (
+const TeamDetails = ({ inputValue, inputValue2, teamName1, teamName2 }) => (
   <Row className="team-id">
     <Col>
-      <span style={{ marginRight: '60px' }}>Team Id 1: {inputValue}</span>
-      Team Id 2: {inputValue2}
+        Team 1: {teamName1}, {inputValue}
+    </Col>
+    <Col>
+      Team 2: {teamName2}, {inputValue2}
     </Col>
   </Row>
 );

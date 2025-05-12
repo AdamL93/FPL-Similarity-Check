@@ -7,17 +7,17 @@ require('dotenv').config();
 const getTeamName = async (request, response) => {
 
     const {teamId} = request.params; 
-    
+
     try {
-        const response = await fetch(`https://fantasy.premierleague.com/api/entry/${teamId}/`);
-        const data = await response.json();
+        const fetchResponse = await fetch(`https://fantasy.premierleague.com/api/entry/${teamId}/`);
+        const data = await fetchResponse.json();
         teamName = data.name
         console.log("This is the team name", teamName)
-        return {teamName: data.name};
+        response.status(200).json({ teamName });
 
     } catch (err) {
         console.log("Could not retreive team name", err)
-        return { error: err.message };
+        response.status(500).json({ error: "Failed to fetch team name" });
     }
 }
 

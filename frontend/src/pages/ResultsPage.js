@@ -158,7 +158,12 @@ const ResultsPage = () => {
       </Row>
       <Row className="gx-5 align-items-center">
         <Col>
-          <TeamDetails inputValue={inputValue} inputValue2={teamName2} />
+          <TeamDetails 
+            inputValue={inputValue} 
+            inputValue2={inputValue2} 
+            teamName1={teamName1}
+            teamName2={teamName2}
+            />
         </Col>
         <Col className="text-end">
           <div className="button-wrapper">

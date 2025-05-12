@@ -19,6 +19,7 @@ const FetchTeamName = async(teamId) => {
     try {
         const response = await fetch(`/api/fplDatabase/teamName/${teamId}`);
         const data = await response.json()
+        console.log(data)
         return data.teamName
 
     } catch(err) {
