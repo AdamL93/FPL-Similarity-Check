@@ -21,4 +21,7 @@ const getTeamName = async (request, response) => {
     }
 }
 
+
+// similar to above but using promise.all() for multiple creator teams.
+// decide whether the promise.all() should be here or further back in the code.
 module.exports = { getTeamName };
