@@ -27,7 +27,7 @@ import Col from 'react-bootstrap/Col';
  */
 const ResultsPage = () => {
 
-  // Destructures input values from the location state.
+  // Destructures input values from the location state passed by navigate.
   const location = useLocation();
   const { inputValue, inputValue2 } = location.state;
   const inputArray = [inputValue, inputValue2];
