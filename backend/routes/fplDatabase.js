@@ -43,6 +43,15 @@ router.get('/SavedResults/:id', getResult);
 router.delete('/DeleteResult/:id', deleteResult);
 
 /**
+ * Route to get team name of inputted team id.
+ * @name get/:teamName/:teamId
+ * @function
+ * @memberof module:router
+ * @param {Function} getTeamName - Service function to retreive team name of inputted teamid 
+ */
+router.get('/teamName/:teamId', getTeamName);
+
+/**
  * Route to get gameweek data for two teams.
  * @name get/:teamId/:teamId2
  * @function
@@ -59,14 +68,5 @@ router.get('/:teamId/:teamId2', getGameweekData);
  * @param {Function} getCreatorGameweekData - Controller function to get gameweek comparison data for all content creators.
  */
 router.get('/:teamId', getCreatorGameweekData);
-
-/**
- * Route to get team name of inputted team id.
- * @name get/:teamName/:teamId
- * @function
- * @memberof module:router
- * @param {Function} getTeamName - Service function to retreive team name of inputted teamid 
- */
-router.get('/teamName/:teamId', getTeamName);
 
 module.exports = router;

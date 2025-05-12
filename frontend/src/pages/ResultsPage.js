@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import FetchTeamName from '../components/FetchTeamName';
 import FetchData from '../components/FetchComparisonData';
 import ResultsList from '../components/ResultsList';
 import TeamDetails from '../components/TeamDetails';
@@ -38,6 +39,8 @@ const ResultsPage = () => {
   const [filterState, setFilterState] = useState(false);
   const [filteredResult, setFilteredResult] = useState([]);
   const [response, setResponse] = useState('');
+  const [teamName1, setTeamName1] = useState('');
+  const [teamName2, setTeamName2] = useState('');
 
   /**
    * Fetches comparison data based on the input values when the component initally renders or when input values change.
@@ -54,6 +57,23 @@ const ResultsPage = () => {
       setOverallSimilarity(fetchedOverallSimilarity);
     };
     FetchApiData();
+  }, [inputValue, inputValue2]);
+
+  /**
+   * Fetches the team names based on the input values. (always two values as this is the results page)
+   * 
+   * @async
+   * @function
+   * @returns {Promisee<void>}
+   */
+  useEffect(() => {
+    const FetchTeamNames = async () =>{
+      const teamName1 = await FetchTeamName(inputValue);
+      const teamName2 = await FetchTeamName(inputValue2);
+      setTeamName1(teamName1);
+      setTeamName2(teamName2);
+    }
+    FetchTeamNames();
   }, [inputValue, inputValue2]);
   
   /**
@@ -138,7 +158,7 @@ const ResultsPage = () => {
       </Row>
       <Row className="gx-5 align-items-center">
         <Col>
-          <TeamDetails inputValue={inputValue} inputValue2={inputValue2} />
+          <TeamDetails inputValue={inputValue} inputValue2={teamName2} />
         </Col>
         <Col className="text-end">
           <div className="button-wrapper">
