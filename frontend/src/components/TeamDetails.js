@@ -20,14 +20,21 @@ import Col from 'react-bootstrap/Col';
  * @returns {JSX.Element} The rendered component.
  */
 const TeamDetails = ({ inputValue, inputValue2, teamName1, teamName2 }) => (
+  <div>
+    <Row className="team-id">
+    <Col>
+        Team 1: {teamName1} | ID: {inputValue}
+    </Col>
+
+  </Row>
   <Row className="team-id">
     <Col>
-        Team 1: {teamName1}, {inputValue}
-    </Col>
-    <Col>
-      Team 2: {teamName2}, {inputValue2}
+      Team 2: {teamName2} | ID: {inputValue2}
     </Col>
   </Row>
+  </div>
+
+  
 );
 
 export default TeamDetails;
